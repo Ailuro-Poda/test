@@ -11,152 +11,256 @@
         @font-face {
             font-family: 'Expo Arabic Light';
             src: url('https://raw.githubusercontent.com/Ailuro-Poda/ExpoArabicLightFont/main/ExpoArabicLight.woff2') format('woff2'),
-                 url('https://raw.githubusercontent.com/Ailuro-Poda/ExpoArabicLightFont/main/ExpoArabicLight.woff') format('woff'),
-                 url('https://raw.githubusercontent.com/Ailuro-Poda/ExpoArabicLightFont/main/ExpoArabicLight.ttf') format('truetype'),
-                 url('https://raw.githubusercontent.com/Ailuro-Poda/ExpoArabicLightFont/main/ExpoArabicLight.otf') format('opentype'),
-                 url('https://raw.githubusercontent.com/Ailuro-Poda/ExpoArabicLightFont/main/ExpoArabicLight.eot') format('embedded-opentype'),
-                 url('https://raw.githubusercontent.com/Ailuro-Poda/ExpoArabicLightFont/main/ExpoArabicLight.svg#ExpoArabicLight') format('svg');
+                url('https://raw.githubusercontent.com/Ailuro-Poda/ExpoArabicLightFont/main/ExpoArabicLight.woff') format('woff'),
+                url('https://raw.githubusercontent.com/Ailuro-Poda/ExpoArabicLightFont/main/ExpoArabicLight.ttf') format('truetype'),
+                url('https://raw.githubusercontent.com/Ailuro-Poda/ExpoArabicLightFont/main/ExpoArabicLight.otf') format('opentype'),
+                url('https://raw.githubusercontent.com/Ailuro-Poda/ExpoArabicLightFont/main/ExpoArabicLight.eot') format('embedded-opentype'),
+                url('https://raw.githubusercontent.com/Ailuro-Poda/ExpoArabicLightFont/main/ExpoArabicLight.svg#ExpoArabicLight') format('svg');
         }
         * {
             font-family: 'Expo Arabic Light' !important;
         }
 
         body {
-    background-color: #333333; /* Black background */
-    color: #ffffff; /* White text */
-}
+            background-color: #333333; /* Black background */
+            color: #ffffff; /* White text */
+        }
 
-table {
-    background-color: #333333; /* Slightly lighter black for table background */
-    color: #ffffff; /* White text for table */
-}
+        table {
+            background-color: #333333; /* Slightly lighter black for table background */
+            color: #ffffff; /* White text for table */
+        }
 
-input, select {
-    background-color: #333333; /* Dark gray input fields */
-    color: #ffffff; /* White text for inputs */
-    /* border-color: #555555; Subtle border for contrast */
-}
+        input, select {
+            background-color: #333333; /* Dark gray input fields */
+            color: #ffffff; /* White text for inputs */
+        }
 
-button {
-    background-color: #444444; /* Dark gray buttons */
-    color: #ffffff; /* White text */
-}
+        #pagination-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        }
 
-button:hover {
-    background-color: #666666; /* Slightly lighter gray on hover */
-}
+        #pagination-buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
 
-th, td {
-    background-color: #2a2a2a; /* Slightly lighter black for table cells */
-    color: #ffffff; /* White text for cells */
-}
+        th, td {
+            background-color: #2a2a2a; /* Slightly lighter black for table cells */
+            color: #ffffff; /* White text for cells */
+        }
 
-.tooltip {
-    background-color: #333333; /* Dark tooltip background */
-    color: #ffffff; /* White text in tooltip */
-    border: 1px solid #555555; /* Subtle border for tooltip */
-}
+        .tooltip {
+            background-color: #333333; /* Dark tooltip background */
+            color: #ffffff; /* White text in tooltip */
+            border: 1px solid #555555; /* Subtle border for tooltip */
+        }
 
-    </style>    
+        /* Media Queries */
+        @media (max-width: 768px) {
+
+        #pagination-buttons {
+            align-items: center;
+            gap: 10px;
+        }
+
+        #pagination-buttons button {
+            width: 100%;
+            font-size: 14px;
+            padding: 8px 16px;
+        }
+
+            body {
+                font-size: 14px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            input, select {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            th, td {
+                padding: 4px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            body {
+                font-size: 16px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            #pagination-buttons {
+            align-items: center;
+            gap: 10px;
+            }
+
+            #pagination-buttons button {
+                width: 100%;
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+
+            input, select {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            body {
+                font-size: 18px;
+            }
+
+            table {
+                font-size: 16px;
+            }
+
+            input, select, button {
+                font-size: 16px;
+                padding: 12px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>  
 </head>
 <body class="bg-gray-800 p-4">
-    <div id="app" class="max-w-6xl mx-auto p-4 bg-slate-700 shadow-lg rounded">
-        <div v-if="error" class="text-red-500 font-bold text-center py-4">{{ error }}</div>        
-        <h1 class="text-4xl font-bold mb-4 text-center">المرجع الشامل لمشاهدة المحقق كونان</h1> <br>
-        
-<!-- Search and Filters -->
-<div class="mb-4 flex flex-col gap-4 items-center">
-    <div class="flex gap-4 w-full justify-center">
-        <select v-model="selectedFilter" class="border px-4 font-bold py-2 rounded">
-            <option value="all">الكل</option>
-            <option value="anime">الأنمي</option>
-            <option value="movies">الأفلام</option>
-            <option value="hourly_special">خاصة (ساعة)</option>
-            <option value="two_hour_special">خاصة (ساعتين)</option>
-        </select>
+    <div id="app" class="container mx-auto p-4 bg-slate-700 shadow-lg rounded">
+        <div v-if="error" class="text-red-500 font-bold text-center py-4">{{ error }}</div>
+        <h1 class="text-4xl font-bold mb-4 text-center">المرجع الشامل لمشاهدة المحقق كونان</h1> 
+        <br>
 
-        <fieldset class="border border-gray-300 rounded p-4 w-1/2">
-            <legend class="px-2 font-bold text-black-600">{{ episodeTypeLegend }}</legend>
-            <div class="flex items-center font-bold gap-4 justify-center">
-                <label>
-                    <input type="radio" v-model="episodeTypeFilter" value="All" checked>
-                    الكل
-                </label>
-                <label>
-                    <input type="radio" v-model="episodeTypeFilter" value="Manga">
-                    مانغا
-                </label>
-                <label>
-                    <input type="radio" v-model="episodeTypeFilter" value="Filler">
-                    فلر
-                </label>
-            </div>
-        </fieldset>
-    </div>
+        <!-- Search and Filters -->
+        <div class="mb-4 flex flex-col gap-4 items-center">
+            <div class="flex gap-4 w-full justify-center">
+                <select v-model="selectedFilter" class="border px-4 font-bold py-2 rounded">
+                    <option value="all">الكل</option>
+                    <option value="anime">الأنمي</option>
+                    <option value="movies">الأفلام</option>
+                    <option value="hourly_special">خاصة (ساعة)</option>
+                    <option value="two_hour_special">خاصة (ساعتين)</option>
+                </select>
 
-    <input v-model="searchQuery" class="border px-4 py-2 font-bold text-xl rounded w-full" placeholder="بحث...">
-</div>
-
-<!-- Table -->
-<div v-if="loading" class="text-center py-4">
-    <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full"></div>
-    جاري التحميل...
-</div>
-<div v-else>
-    <table class="min-w-full border-collapse border border-gray-300">
-        <thead>
-            <tr class="bg-gray-200">
-                <th class="border border-gray-300 text-xl px-2 py-2 text-center w-1/6">
-                    {{ episodeNumberHeader }}
-                    <div class="relative">
-                        <div class="text-lg text-red-600 mt-1" @mouseenter="showTooltip = true" @mouseleave="showTooltip = false">({{ totalEpisodes }})</div>
-                        <!-- Tooltip -->
-                        <div v-if="showTooltip && selectedFilter === 'all' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات + الأفلام (مانغا + فلر)</div>
-                        <div v-if="showTooltip && selectedFilter === 'all' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات + الأفلام (مانغا)</div>
-                        <div v-if="showTooltip && selectedFilter === 'all' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات + الأفلام (فلر)</div>
-                        
-                        <div v-if="showTooltip && selectedFilter === 'anime' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات (مانغا + فلر)</div>
-                        <div v-if="showTooltip && selectedFilter === 'anime' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات (مانغا)</div>
-                        <div v-if="showTooltip && selectedFilter === 'anime' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات (فلر)</div>
-
-                        <div v-if="showTooltip && selectedFilter === 'movies' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الأفلام (مانغا + فلر)</div>
-                        <div v-if="showTooltip && selectedFilter === 'movies' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الأفلام (مانغا)</div>
-                        <div v-if="showTooltip && selectedFilter === 'movies' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الأفلام (فلر)</div>
-
-                        <div v-if="showTooltip && selectedFilter === 'hourly_special' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعة" (مانغا + فلر)</div>
-                        <div v-if="showTooltip && selectedFilter === 'hourly_special' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعة" (مانغا)</div>
-                        <div v-if="showTooltip && selectedFilter === 'hourly_special' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعة" (فلر)</div>
-
-                        <div v-if="showTooltip && selectedFilter === 'two_hour_special' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعتين" (مانغا + فلر)</div>
-                        <div v-if="showTooltip && selectedFilter === 'two_hour_special' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعتين (مانغا)</div>
-                        <div v-if="showTooltip && selectedFilter === 'two_hour_special' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعتين" (فلر)</div>
+                <fieldset class="border border-gray-300 rounded p-4 w-1/2">
+                    <legend class="px-2 font-bold text-black-600">{{ episodeTypeLegend }}</legend>
+                    <div class="flex items-center font-bold gap-4 justify-center">
+                        <label>
+                            <input type="radio" v-model="episodeTypeFilter" value="All" checked>
+                            الكل
+                        </label>
+                        <label>
+                            <input type="radio" v-model="episodeTypeFilter" value="Manga">
+                            مانغا
+                        </label>
+                        <label>
+                            <input type="radio" v-model="episodeTypeFilter" value="Filler">
+                            فلر
+                        </label>
                     </div>
-                </th>                
-                <th class="border border-gray-300 text-xl px-4 py-2 text-center w-5/6">
-                    {{ episodeTitleHeader }}
-                </th>
-            </tr>
-        </thead>
-                
-        <tbody>
-            <tr v-for="episode in paginatedEpisodes" :key="episode.EpisodeNumber" class="hover:bg-blue-100">
-                <td class="border border-gray-300 px-2 text-lg font-bold py-2 text-center">{{ episode.EpisodeNumber }}</td>
-                <td class="border border-gray-300 px-4 text-lg font-bold py-2 text-center">{{ episode.EpisodeTitle }}</td>
-            </tr>
-        </tbody>
-    </table>
+                </fieldset>
+            </div>
 
-    <!-- Pagination Controls -->
-    <div class="flex justify-between items-center mt-4">
-        <button @click="goToFirstPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600">الأول</button>
-        <button @click="nextPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600" :disabled="currentPage === totalPages">التالي</button>
-        <span class="font-bold">الصفحة {{ currentPage }} من {{ totalPages }}</span>
-        <input type="number" min="1" :max="totalPages" v-model="currentPage" @input="handlePageInput($event)" class="w-16 px-2 py-1 rounded border font-bold border-gray-300 text-center" />
-        <button @click="prevPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600" :disabled="currentPage === 1">السابق</button>
-        <button @click="goToLastPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600">الأخير</button>
+            <input v-model="searchQuery" class="border px-4 py-2 font-bold text-xl rounded w-full" placeholder="بحث...">
+        </div>
+
+        <!-- Table -->
+        <div v-if="loading" class="text-center py-4">
+            <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full"></div>
+            جاري التحميل...
+        </div>
+        <div v-else>
+            <table class="min-w-full border-collapse border border-gray-300">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border border-gray-300 text-xl px-2 py-2 text-center w-1/6">
+                            {{ episodeNumberHeader }}
+                            <div class="relative">
+                                <div class="text-lg text-red-600 mt-1" @mouseenter="showTooltip = true" @mouseleave="showTooltip = false">({{ totalEpisodes }})</div>
+                                <!-- Tooltip -->
+                                <div v-if="showTooltip && selectedFilter === 'all' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات + الأفلام (مانغا + فلر)</div>
+                                <div v-if="showTooltip && selectedFilter === 'all' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات + الأفلام (مانغا)</div>
+                                <div v-if="showTooltip && selectedFilter === 'all' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات + الأفلام (فلر)</div>
+                                
+                                <div v-if="showTooltip && selectedFilter === 'anime' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات (مانغا + فلر)</div>
+                                <div v-if="showTooltip && selectedFilter === 'anime' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات (مانغا)</div>
+                                <div v-if="showTooltip && selectedFilter === 'anime' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات (فلر)</div>
+        
+                                <div v-if="showTooltip && selectedFilter === 'movies' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الأفلام (مانغا + فلر)</div>
+                                <div v-if="showTooltip && selectedFilter === 'movies' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الأفلام (مانغا)</div>
+                                <div v-if="showTooltip && selectedFilter === 'movies' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الأفلام (فلر)</div>
+        
+                                <div v-if="showTooltip && selectedFilter === 'hourly_special' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعة" (مانغا + فلر)</div>
+                                <div v-if="showTooltip && selectedFilter === 'hourly_special' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعة" (مانغا)</div>
+                                <div v-if="showTooltip && selectedFilter === 'hourly_special' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعة" (فلر)</div>
+        
+                                <div v-if="showTooltip && selectedFilter === 'two_hour_special' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعتين" (مانغا + فلر)</div>
+                                <div v-if="showTooltip && selectedFilter === 'two_hour_special' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعتين (مانغا)</div>
+                                <div v-if="showTooltip && selectedFilter === 'two_hour_special' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعتين" (فلر)</div>
+                            </div>
+                        </th>                
+                        <th class="border border-gray-300 text-xl px-4 py-2 text-center w-5/6">
+                            {{ episodeTitleHeader }}
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr v-for="episode in paginatedEpisodes" :key="episode.EpisodeNumber" class="hover:bg-blue-100">
+                        <td class="border border-gray-300 px-2 text-lg font-bold py-2 text-center">{{ episode.EpisodeNumber }}</td>
+                        <td class="border border-gray-300 px-4 text-lg font-bold py-2 text-center">{{ episode.EpisodeTitle }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Pagination Controls -->
+            <div class="flex flex-wrap justify-between items-center mt-4" id="pagination-buttons">
+                <button @click="goToFirstPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600">
+                    الأول
+                </button>
+                <button @click="nextPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600" :disabled="currentPage === totalPages">
+                    التالي
+                </button>
+                <input type="number" min="1" :max="totalPages" v-model="currentPage" @input="handlePageInput($event)" class="w-16 px-2 py-1 rounded border font-bold border-gray-300 text-center" />
+                <span class="font-bold" id="pagination-buttons">من {{ totalPages }}</span>
+                <button @click="prevPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600" :disabled="currentPage === 1">
+                    السابق
+                </button>
+                <button @click="goToLastPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600">
+                    الأخير
+                </button>
+            </div>
+        </div>
     </div>
-</div>
-</div>
 
     <script>
         const { createApp } = Vue;
