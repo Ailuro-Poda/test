@@ -172,7 +172,7 @@
                 </select>
 
                 <fieldset class="border border-gray-300 rounded p-4 w-1/2">
-                    <legend class="px-2 font-bold text-black-600">{{ episodeTypeLegend }}</legend>
+                    <legend class="px-2 font-bold text-blue-600">{{ episodeTypeLegend }}</legend>
                     <div class="flex items-center font-bold gap-4 justify-center">
                         <label>
                             <input type="radio" v-model="episodeTypeFilter" value="All" checked>
@@ -250,7 +250,8 @@
                 <button @click="nextPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600" :disabled="currentPage === totalPages">
                     التالي
                 </button>
-                <input type="number" min="1" :max="totalPages" v-model="currentPage" @input="handlePageInput($event)" class="w-16 px-2 py-1 rounded border font-bold border-gray-300 text-center" />
+                <span class="font-bold" id="pagination-buttons">صفحة</span>
+                <input type="number" max="totalPages" v-model="currentPage" @input="handlePageInput($event)" class="w-16 px-2 py-1 rounded border font-bold border-gray-300 text-center"/>
                 <span class="font-bold" id="pagination-buttons">من {{ totalPages }}</span>
                 <button @click="prevPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600" :disabled="currentPage === 1">
                     السابق
@@ -379,20 +380,21 @@
                     this.trackLastPage();
                 },
                 handlePageInput(event) {
-                const pageInput = event.target.value;
-                let pageNumber = parseInt(pageInput, 10);
-                
-                // Ensure the page number is within the valid range
-                if (isNaN(pageNumber) || pageNumber < 1) {
-                    pageNumber = 1;
-                } else if (pageNumber > this.totalPages) {
-                    pageNumber = this.totalPages;
-                }
+                    const pageInput = event.target.value;
+                    let pageNumber = parseInt(pageInput, 10);
+                    
+                    // Ensure the page number is within the valid range
+                    //if (isNaN(pageNumber) || pageNumber < 1)
+                    if (pageNumber < 1) {
+                        pageNumber = 1;
+                    } else if (pageNumber > this.totalPages) {
+                        pageNumber = this.totalPages;
+                    }
 
-                this.currentPage = pageNumber;
-                event.target.value = pageNumber; // Reset the value of the input to the corrected page number
-                this.trackLastPage();
-            },
+                    this.currentPage = pageNumber;
+                    event.target.value = pageNumber; // Reset the value of the input to the corrected page number
+                    this.trackLastPage();
+                },
 
                 normalizeText(text) {
                 let normalizedText = text.toLowerCase();
