@@ -198,16 +198,16 @@
 
                                 <!-- Pagination Controls -->
             <div class="flex flex-wrap justify-between items-center" id="pagination-buttons">
-                <button @click="goToFirstPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600">
+                <button @click="goToFirstPage" class="bg-green-800 text-white font-bold px-4 py-2 rounded hover:bg-blue-300">
                     الأول
                 </button>
-                <button @click="nextPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600" :disabled="currentPage === totalPages">
+                <button @click="nextPage" class="bg-blue-700 text-white font-bold px-4 py-2 rounded hover:bg-green-400" :disabled="currentPage === totalPages">
                     التالي
                 </button>
-                <button @click="prevPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600" :disabled="currentPage === 1">
+                <button @click="prevPage" class="bg-blue-700 text-white font-bold px-4 py-2 rounded hover:bg-green-400" :disabled="currentPage === 1">
                     السابق
                 </button>
-                <button @click="goToLastPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600">
+                <button @click="goToLastPage" class="bg-green-800 text-white font-bold px-4 py-2 rounded hover:bg-blue-300">
                     الأخير
                 </button>
             </div>
