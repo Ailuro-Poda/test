@@ -69,9 +69,13 @@
         }
 
         #pagination-buttons button {
-            width: 100%;
+            /* width: 100%; */
             font-size: 14px;
             padding: 8px 16px;
+        }
+
+        .fixKeyboardLayout{
+            margin-bottom: 100px;
         }
 
             body {
@@ -111,7 +115,7 @@
             }
 
             #pagination-buttons button {
-                width: 100%;
+                /* width: 100%; */
                 font-size: 14px;
                 padding: 8px 16px;
             }
@@ -172,18 +176,18 @@
                 </select>
 
                 <fieldset class="border border-gray-300 rounded p-4 w-1/2">
-                    <legend class="px-2 font-bold text-blue-600">{{ episodeTypeLegend }}</legend>
-                    <div class="flex items-center font-bold gap-4 justify-center">
+                    <legend class="px-2 font-bold text-white-600">{{ episodeTypeLegend }}</legend>
+                    <div class="flex items-center text-blue font-bold gap-4 justify-center">
                         <label>
-                            <input type="radio" v-model="episodeTypeFilter" value="All" checked>
+                            <input type="radio" v-model="episodeTypeFilter" value="All" checked class="scale-150">
                             الكل
                         </label>
                         <label>
-                            <input type="radio" v-model="episodeTypeFilter" value="Manga">
+                            <input type="radio" v-model="episodeTypeFilter" value="Manga" class="scale-150">
                             مانغا
                         </label>
                         <label>
-                            <input type="radio" v-model="episodeTypeFilter" value="Filler">
+                            <input type="radio" v-model="episodeTypeFilter" value="Filler" class="scale-150">
                             فلر
                         </label>
                     </div>
@@ -191,6 +195,23 @@
             </div>
 
             <input v-model="searchQuery" class="border px-4 py-2 font-bold text-xl rounded w-full" placeholder="بحث...">
+
+                                <!-- Pagination Controls -->
+            <div class="flex flex-wrap justify-between items-center" id="pagination-buttons">
+                <button @click="goToFirstPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600">
+                    الأول
+                </button>
+                <button @click="nextPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600" :disabled="currentPage === totalPages">
+                    التالي
+                </button>
+                <button @click="prevPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600" :disabled="currentPage === 1">
+                    السابق
+                </button>
+                <button @click="goToLastPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600">
+                    الأخير
+                </button>
+            </div>
+
         </div>
 
         <!-- Table -->
@@ -244,22 +265,15 @@
 
             <!-- Pagination Controls -->
             <div class="flex flex-wrap justify-between items-center mt-4" id="pagination-buttons">
-                <button @click="goToFirstPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600">
-                    الأول
-                </button>
-                <button @click="nextPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600" :disabled="currentPage === totalPages">
-                    التالي
-                </button>
                 <span class="font-bold" id="pagination-buttons">صفحة</span>
-                <input type="number" max="totalPages" v-model="currentPage" @input="handlePageInput($event)" class="w-16 px-2 py-1 rounded border font-bold border-gray-300 text-center"/>
+                <select v-model="currentPage" @change="handlePageSelect" class="w-20 px-2 py-1 rounded border font-bold border-gray-300 text-center">
+                    <option v-for="page in totalPages" :key="page" :value="page">
+                        {{ page }}
+                    </option>
+                </select>
                 <span class="font-bold" id="pagination-buttons">من {{ totalPages }}</span>
-                <button @click="prevPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600" :disabled="currentPage === 1">
-                    السابق
-                </button>
-                <button @click="goToLastPage" class="bg-blue-500 text-white font-bold px-4 py-2 rounded hover:bg-blue-600">
-                    الأخير
-                </button>
             </div>
+            <!-- <div class="fixKeyboardLayout"></div> -->
         </div>
     </div>
 
@@ -347,6 +361,13 @@
                     } else {
                         this.currentPage = 1;
                     }
+                },
+
+                selectedFilter() {
+                    this.resetPageToOne();
+                },
+                episodeTypeFilter() {
+                    this.resetPageToOne();
                 }
             },
             methods: {
@@ -379,34 +400,45 @@
                     this.currentPage = this.totalPages;
                     this.trackLastPage();
                 },
-                handlePageInput(event) {
-                    const pageInput = event.target.value;
+                handlePageSelect(event) {
+                    let pageInput = event.target.value;
+
+                    // If the value is empty or invalid, set it to 1
+                    if (isNaN(parseInt(pageInput, 10))) {
+                        pageInput = 1;
+                    }
+
                     let pageNumber = parseInt(pageInput, 10);
-                    
+
                     // Ensure the page number is within the valid range
-                    //if (isNaN(pageNumber) || pageNumber < 1)
                     if (pageNumber < 1) {
                         pageNumber = 1;
                     } else if (pageNumber > this.totalPages) {
                         pageNumber = this.totalPages;
                     }
 
+                    // Update the current page and adjust the select value
                     this.currentPage = pageNumber;
-                    event.target.value = pageNumber; // Reset the value of the input to the corrected page number
+                    event.target.value = pageNumber; // Reset the value of the dropdown to the corrected page number
                     this.trackLastPage();
                 },
 
                 normalizeText(text) {
-                let normalizedText = text.toLowerCase();
-                for (let [key, values] of Object.entries(this.replacementDict)) {
-                    const regex = new RegExp(key, 'g'); // Global search for the word
-                    normalizedText = normalizedText.replace(regex, (match) => {
-                        // Replace with all possible values, separated by "|"
-                        return `(${values.join("|")})`;
-                    });
+                    let normalizedText = text.toLowerCase();
+                    for (let [key, values] of Object.entries(this.replacementDict)) {
+                        const regex = new RegExp(key, 'g'); // Global search for the word
+                        normalizedText = normalizedText.replace(regex, (match) => {
+                            // Replace with all possible values, separated by "|"
+                            return `(${values.join("|")})`;
+                        });
+                    }
+                    return normalizedText;
+                },
+                    // Reset the current page to 1
+                resetPageToOne() {
+                    this.currentPage = 1; // Reset the page number to 1
+                    this.handlePageSelect({ target: { value: 1 } }); // Call handlePageSelect to update
                 }
-                return normalizedText;
-            }
             },
             mounted() {
             fetch(jsonUrl)
