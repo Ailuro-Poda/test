@@ -361,33 +361,34 @@
         </div>
     </div>
 
-    <!-- GoatCounter integration -->
-    <script>
-        // Wait until the GoatCounter script is fully loaded
-        var t = setInterval(function() {
-            if (window.goatcounter && window.goatcounter.visit_count) {
-                clearInterval(t);
-                window.goatcounter.visit_count({
-                    append: '#view-count-container', // Append to the view count container
-                    style: `
-                        div { 
-                            border-color: #fff; 
-                            background-color: #222; 
-                            color: #fff; 
-                        }
-                        #gcvc-views {
-                            font-size: 24px;
-                            font-weight: bold;
-                        }
-                    `
-                });
-            }
-        }, 100);
-    </script>
-    <script data-goatcounter="https://dcref.goatcounter.com/count"
-            async src="//gc.zgo.at/count.js"></script>
+<!-- GoatCounter integration -->
+<script>
+    // Function to check if the GoatCounter script has loaded
+    function checkGoatCounter() {
+        if (window.goatcounter && window.goatcounter.visit_count) {
+            window.goatcounter.visit_count({
+                append: '#view-count-container', // Append to the view count container
+                style: `
+                    div { 
+                        border-color: #fff; 
+                        background-color: #222; 
+                        color: #fff; 
+                    }
+                    #gcvc-views {
+                        font-size: 24px;
+                        font-weight: bold;
+                    }
+                `
+            });
+        } else {
+            // If not loaded yet, try again after 100ms
+            setTimeout(checkGoatCounter, 100);
+        }
+    }
 
-    <script>
+    // Start checking if GoatCounter is loaded
+    checkGoatCounter();
+</script>
         const { createApp } = Vue;
     
         createApp({
