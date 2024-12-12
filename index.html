@@ -280,7 +280,7 @@
                         }">
                             <label :class="{'bg-red-950 p-1 text-white rounded': episodeTypeFilter === 'Filler'}">
                                 <input type="radio" v-model="episodeTypeFilter" value="Filler" class="scale-150">
-                                فلر
+                                فِلر
                             </label>
                         </div>
                     </div>
@@ -299,7 +299,7 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="w-6 h-6 bg-red-950 rounded-full"></span>
-                        <span>فلر</span>
+                        <span>فِلر</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="w-6 h-6 bg-yellow-900 rounded-full"></span>
@@ -349,25 +349,25 @@
                             <div class="relative">
                                 <div class="text-lg text-red-600 mt-1" @mouseenter="showTooltip = true" @mouseleave="showTooltip = false">({{ totalEpisodes }})</div>
                                 <!-- Tooltip -->
-                                <div v-if="showTooltip && selectedFilter === 'all' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات + الأفلام (مانغا + فلر)</div>
+                                <div v-if="showTooltip && selectedFilter === 'all' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات + الأفلام (مانغا + فِلر)</div>
                                 <div v-if="showTooltip && selectedFilter === 'all' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات + الأفلام (مانغا)</div>
-                                <div v-if="showTooltip && selectedFilter === 'all' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات + الأفلام (فلر)</div>
+                                <div v-if="showTooltip && selectedFilter === 'all' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات + الأفلام (فِلر)</div>
                                 
-                                <div v-if="showTooltip && selectedFilter === 'anime' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات (مانغا + فلر)</div>
+                                <div v-if="showTooltip && selectedFilter === 'anime' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات (مانغا + فِلر)</div>
                                 <div v-if="showTooltip && selectedFilter === 'anime' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات (مانغا)</div>
-                                <div v-if="showTooltip && selectedFilter === 'anime' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات (فلر)</div>
+                                <div v-if="showTooltip && selectedFilter === 'anime' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات (فِلر)</div>
         
-                                <div v-if="showTooltip && selectedFilter === 'movies' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الأفلام (مانغا + فلر)</div>
+                                <div v-if="showTooltip && selectedFilter === 'movies' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الأفلام (مانغا + فِلر)</div>
                                 <div v-if="showTooltip && selectedFilter === 'movies' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الأفلام (مانغا)</div>
-                                <div v-if="showTooltip && selectedFilter === 'movies' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الأفلام (فلر)</div>
+                                <div v-if="showTooltip && selectedFilter === 'movies' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الأفلام (فِلر)</div>
         
-                                <div v-if="showTooltip && selectedFilter === 'hourly_special' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعة" (مانغا + فلر)</div>
+                                <div v-if="showTooltip && selectedFilter === 'hourly_special' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعة" (مانغا + فِلر)</div>
                                 <div v-if="showTooltip && selectedFilter === 'hourly_special' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعة" (مانغا)</div>
-                                <div v-if="showTooltip && selectedFilter === 'hourly_special' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعة" (فلر)</div>
+                                <div v-if="showTooltip && selectedFilter === 'hourly_special' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعة" (فِلر)</div>
         
-                                <div v-if="showTooltip && selectedFilter === 'two_hour_special' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعتين" (مانغا + فلر)</div>
+                                <div v-if="showTooltip && selectedFilter === 'two_hour_special' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعتين" (مانغا + فِلر)</div>
                                 <div v-if="showTooltip && selectedFilter === 'two_hour_special' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعتين (مانغا)</div>
-                                <div v-if="showTooltip && selectedFilter === 'two_hour_special' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعتين" (فلر)</div>
+                                <div v-if="showTooltip && selectedFilter === 'two_hour_special' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعتين" (فِلر)</div>
                             </div>
                         </th>                
                         <th class="border border-gray-300 text-xl px-4 py-2 text-center w-5/6">
