@@ -231,6 +231,14 @@
                 padding: 10px;
             }
         }
+
+            /* Style the GoatCounter view count */
+            #view-count-container {
+                text-align: center;
+                margin-top: 20px;
+                font-size: 18px;
+                font-weight: bold;
+            }
     </style>  
 </head>
 <body class="bg-gray-800 p-4">
@@ -247,10 +255,9 @@
         <h1 class="text-4xl font-bold mb-4 text-center" onclick="location.reload();">الدليل الشامل لمشاهدة المحقق كونان</h1> 
         <br>
 
-        <!-- Visitor Counter Display -->
-        <div id="visitor-counter" class="text-center text-xl text-white mt-6">
-            <p>عدد الزوار: <span id="visit-count">...</span></p>
-        </div>
+        <!-- View Count Container -->
+        <div id="view-count-container"></div>
+        <!-- Rest of your content -->
 
         <!-- Search and Filters -->
         <div class="mb-4 flex flex-col gap-4 items-center">
@@ -567,15 +574,23 @@
             },
             mounted() {
                 this.loadData();
+                // GoatCounter: Display visit count
+                goatcounter.visit_count({
+                    append: '#view-count-container',
+                    style: `
+                        div { 
+                            border-color: #fff; 
+                            background-color: #222; 
+                            color: #fff; 
+                        }
+                        #gcvc-views {
+                            font-size: 24px;
+                            font-weight: bold;
+                        }
+                    `
+                });
             }
         }).mount('#app');
-    </script>
-    <!-- GoatCounter Script for Visit Count -->
-    <script>
-        // Append the visit count to the body (or another element by CSS selector)
-        window.goatcounter.visit_count({
-            append: '#visitor-counter #visit-count' // This is where the counter will be displayed
-        });
-    </script>             
+    </script>           
 </body>
 </html>
