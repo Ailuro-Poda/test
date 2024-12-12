@@ -266,19 +266,19 @@
                             الكل
                         </label>
                         <div :class="{
-                            'bg-teal-900 p-1': episodeTypeFilter !== 'Filler', 
+                            'p-1': episodeTypeFilter !== 'Filler', 
                             'p-1': episodeTypeFilter === 'Filler' 
                         }">
-                            <label :class="{'bg-teal-900 text-white rounded': episodeTypeFilter === 'Manga'}">
+                            <label :class="{'bg-teal-900 p-1 text-white rounded': episodeTypeFilter === 'Manga'}">
                                 <input type="radio" v-model="episodeTypeFilter" value="Manga" class="scale-150">
                                 مانغا
                             </label>
                         </div>
                         <div :class="{
-                            'bg-red-950 p-1': episodeTypeFilter !== 'Manga', 
+                            'p-1': episodeTypeFilter !== 'Manga', 
                             'p-1': episodeTypeFilter === 'Manga'
                         }">
-                            <label :class="{'bg-red-950 text-white rounded': episodeTypeFilter === 'Filler'}">
+                            <label :class="{'bg-red-950 p-1 text-white rounded': episodeTypeFilter === 'Filler'}">
                                 <input type="radio" v-model="episodeTypeFilter" value="Filler" class="scale-150">
                                 فلر
                             </label>
@@ -288,6 +288,34 @@
             </div>
 
             <input v-model="searchQuery" class="border px-4 py-2 font-bold text-xl rounded w-full" placeholder="بحث...">
+
+                        <!-- Centered Description Box for Colors and Their Names with "معاني الألوان" Legend -->
+            <fieldset class="my-4 w-full font-bold p-4 rounded border">
+                <legend class="px-2 font-bold text-white-600">معاني الألوان</legend>
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 bg-teal-900 rounded-full"></span>
+                        <span>مانغا</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 bg-red-950 rounded-full"></span>
+                        <span>فلر</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 bg-yellow-900 rounded-full"></span>
+                        <span>الأفلام</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 bg-sky-800 rounded-full"></span>
+                        <span>حلقة خاصة (ساعة)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-6 h-6 bg-blue-950 rounded-full"></span>
+                        <span>حلقة خاصة (ساعتين)</span>
+                    </div>
+                </div>
+            </fieldset>
+
 
                                 <!-- Pagination Controls -->
             <div class="flex flex-wrap justify-between items-center" id="pagination-buttons">
