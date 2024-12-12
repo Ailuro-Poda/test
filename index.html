@@ -244,7 +244,6 @@
             حاول مرة أخرى
         </button>
     </div>
-    <div id="view-count-container"></div>
         <h1 class="text-4xl font-bold mb-4 text-center" onclick="location.reload();">الدليل الشامل لمشاهدة المحقق كونان</h1> 
         <br>
 
@@ -361,34 +360,7 @@
         </div>
     </div>
 
-<!-- GoatCounter integration -->
-<script>
-    // Function to check if the GoatCounter script has loaded
-    function checkGoatCounter() {
-        if (window.goatcounter && window.goatcounter.visit_count) {
-            window.goatcounter.visit_count({
-                append: '#view-count-container', // Append to the view count container
-                style: `
-                    div { 
-                        border-color: #fff; 
-                        background-color: #222; 
-                        color: #fff; 
-                    }
-                    #gcvc-views {
-                        font-size: 24px;
-                        font-weight: bold;
-                    }
-                `
-            });
-        } else {
-            // If not loaded yet, try again after 100ms
-            setTimeout(checkGoatCounter, 100);
-        }
-    }
-
-    // Start checking if GoatCounter is loaded
-    checkGoatCounter();
-</script>
+    <script>
         const { createApp } = Vue;
     
         createApp({
@@ -592,6 +564,6 @@
                 this.loadData();
             }
         }).mount('#app');
-    </script>
+    </script>         
 </body>
 </html>
