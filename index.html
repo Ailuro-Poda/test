@@ -284,7 +284,7 @@
                             </label>
                         </div>
                     </div>
-                </fieldset>                          
+                </fieldset>
             </div>
 
             <input v-model="searchQuery" class="border px-4 py-2 font-bold text-xl rounded w-full" placeholder="بحث...">
@@ -293,26 +293,43 @@
             <fieldset class="my-4 w-full font-bold p-4 rounded border">
                 <legend class="px-2 font-bold text-white-600">معاني الألوان</legend>
                 <div class="flex flex-wrap gap-4 justify-center">
-                    <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-2" @mouseover="showTooltip1 = true" @mouseleave="showTooltip1 = false">
                         <span class="w-6 h-6 bg-teal-900 rounded-full"></span>
                         <span>مانغا</span>
-                    </div>
-                    <div class="flex items-center gap-2">
+                        <span v-if="showTooltip1" class="absolute bg-gray-700 -translate-y-10 text-white text-sm rounded p-1 mt-1 border-2 border-yellow-400">
+                            حلقات مأخوذة من المانغا الأصلية
+                        </span>
+                    </div>                                       
+                    <div class="flex items-center gap-2" @mouseover="showTooltip2 = true" @mouseleave="showTooltip2 = false">
                         <span class="w-6 h-6 bg-red-950 rounded-full"></span>
                         <span>فِلر</span>
-                    </div>
-                    <div class="flex items-center gap-2">
+                        <span v-if="showTooltip2" class="absolute bg-gray-700 -translate-y-11 text-center translate-x-20 text-white text-sm rounded p-1 mt-1 border-2 border-yellow-400">
+                            حلقات لا تنتمي إلى القصة الأصلية ولا ترتبط بسير الأحداث
+                        </span>
+                    </div>                    
+                    <div class="flex items-center gap-2" @mouseover="showTooltip3 = true" @mouseleave="showTooltip3 = false">
                         <span class="w-6 h-6 bg-yellow-900 rounded-full"></span>
                         <span>الأفلام</span>
+                        <span v-if="showTooltip3" class="absolute bg-gray-700 -translate-y-11 translate-x-20 text-center text-white text-sm rounded p-1 mt-1 border-2 border-yellow-400">
+                            أفلام لا علاقة لها بالقصة الأساسية وعالمها منفصل
+                        </span>
                     </div>
-                    <div class="flex items-center gap-2">
+                    
+                    <div class="flex items-center gap-2" @mouseover="showTooltip4 = true" @mouseleave="showTooltip4 = false">
                         <span class="w-6 h-6 bg-sky-800 rounded-full"></span>
                         <span>حلقة خاصة (ساعة)</span>
+                        <span v-if="showTooltip4" class="absolute bg-gray-700 -translate-y-11 translate-x-20 text-center text-white text-sm rounded p-1 mt-1 border-2 border-yellow-400">
+                            حلقات تمتد لفترة أطول من الحلقة العادية التي مدتها 24 دقيقة، حيث يصل بعضها إلى ساعة ونصف
+                        </span>
                     </div>
-                    <div class="flex items-center gap-2">
+                    
+                    <div class="flex items-center gap-2" @mouseover="showTooltip5 = true" @mouseleave="showTooltip5 = false">
                         <span class="w-6 h-6 bg-blue-950 rounded-full"></span>
                         <span>حلقة خاصة (ساعتين)</span>
-                    </div>
+                        <span v-if="showTooltip5" class="absolute bg-gray-700 -translate-y-11 translate-x-20 text-center text-white text-sm rounded p-1 mt-1 border-2 border-yellow-400">
+                            حلقات تمتد لفترة أطول من الحلقة العادية التي مدتها 24 دقيقة، حيث يصل بعضها إلى ساعتين ونصف
+                        </span>
+                    </div>                    
                 </div>
             </fieldset>
 
@@ -416,6 +433,11 @@
                     },
                     jsonUrl: "https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/episodes.json",
                     showTooltip: false, // Controls tooltip visibility
+                    showTooltip1: false, // Controls tooltip visibility
+                    showTooltip2: false,
+                    showTooltip3: false,
+                    showTooltip4: false,
+                    showTooltip5: false,
                     episodeTypeFilter: 'All', // Default filter is "All"
                     episodes: [],
                     loading: true,
