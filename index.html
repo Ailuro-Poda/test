@@ -265,16 +265,26 @@
                             <input type="radio" v-model="episodeTypeFilter" value="All" checked class="scale-150">
                             الكل
                         </label>
-                        <label>
-                            <input type="radio" v-model="episodeTypeFilter" value="Manga" class="scale-150">
-                            مانغا
-                        </label>
-                        <label>
-                            <input type="radio" v-model="episodeTypeFilter" value="Filler" class="scale-150">
-                            فلر
-                        </label>
+                        <div :class="{
+                            'bg-teal-900 p-1': episodeTypeFilter !== 'Filler', 
+                            'p-1': episodeTypeFilter === 'Filler' 
+                        }">
+                            <label :class="{'bg-teal-900 text-white rounded': episodeTypeFilter === 'Manga'}">
+                                <input type="radio" v-model="episodeTypeFilter" value="Manga" class="scale-150">
+                                مانغا
+                            </label>
+                        </div>
+                        <div :class="{
+                            'bg-red-950 p-1': episodeTypeFilter !== 'Manga', 
+                            'p-1': episodeTypeFilter === 'Manga'
+                        }">
+                            <label :class="{'bg-red-950 text-white rounded': episodeTypeFilter === 'Filler'}">
+                                <input type="radio" v-model="episodeTypeFilter" value="Filler" class="scale-150">
+                                فلر
+                            </label>
+                        </div>
                     </div>
-                </fieldset>
+                </fieldset>                          
             </div>
 
             <input v-model="searchQuery" class="border px-4 py-2 font-bold text-xl rounded w-full" placeholder="بحث...">
@@ -340,7 +350,9 @@
 
                 <tbody>
                     <tr v-for="episode in paginatedEpisodes" :key="episode.EpisodeNumber" class="hover:bg-blue-100">
-                        <td class="border border-gray-300 px-2 text-lg font-bold py-2 text-center">{{ episode.EpisodeNumber }}</td>
+                        <td :class="[getBackgroundColor(episode), 'border', 'border-gray-300', 'px-2', 'text-lg', 'font-bold', 'py-2', 'text-center']">
+                            {{ episode.EpisodeNumber }}
+                        </td>                        
                         <td class="border border-gray-300 px-4 text-lg font-bold py-2 text-center">{{ episode.EpisodeTitle }}</td>
                     </tr>
                 </tbody>
@@ -559,6 +571,44 @@
                 reloadPage() {
                     location.reload(); // Reloads the page
                 },
+
+                getBackgroundColor(episode) {
+                    if ((this.selectedFilter === 'all' || this.selectedFilter === 'anime') && this.episodeTypeFilter === 'All') {
+                        // Check for special cases first
+                        if (episode.EpisodeNumber.includes("الفيلم")) {
+                            return 'bg-yellow-900';
+                        } else if (episode.EpisodeSpecial === '1') {
+                            return 'bg-sky-800';
+                        } else if (episode.EpisodeSpecial === '2') {
+                            return 'bg-blue-950';
+                        }
+
+                        // Check for EpisodeType after exceptions
+                        if (episode.EpisodeType === 'م' || episode.EpisodeType === 'ث') {
+                            return 'bg-teal-900';
+                        } else if (episode.EpisodeType === 'ف') {
+                            return 'bg-red-950';
+                        }
+                    } else if ((this.selectedFilter === 'all') && this.episodeTypeFilter === 'Manga' || this.episodeTypeFilter === 'Filler') {
+                        // Check for special cases first
+                        if (episode.EpisodeNumber.includes("الفيلم")) {
+                            return 'bg-yellow-900';
+                        } else if (episode.EpisodeSpecial === '1') {
+                            return 'bg-sky-800';
+                        } else if (episode.EpisodeSpecial === '2') {
+                            return 'bg-blue-950';
+                        }
+                    } else if ((this.selectedFilter === 'anime') && this.episodeTypeFilter === 'Manga' || this.episodeTypeFilter === 'Filler') {
+                        // Check for special cases first
+                        if (episode.EpisodeSpecial === '1') {
+                            return 'bg-sky-800';
+                        } else if (episode.EpisodeSpecial === '2') {
+                            return 'bg-blue-950';
+                        }
+                    }
+                    return ''; // Default case
+                },
+
             },
             mounted() {
                 this.loadData();
