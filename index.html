@@ -231,14 +231,6 @@
                 padding: 10px;
             }
         }
-
-            /* Style the GoatCounter view count */
-            #view-count-container {
-                text-align: center;
-                margin-top: 20px;
-                font-size: 18px;
-                font-weight: bold;
-            }
     </style>  
 </head>
 <body class="bg-gray-800 p-4">
@@ -252,12 +244,9 @@
             حاول مرة أخرى
         </button>
     </div>
+    <div id="view-count-container"></div>
         <h1 class="text-4xl font-bold mb-4 text-center" onclick="location.reload();">الدليل الشامل لمشاهدة المحقق كونان</h1> 
         <br>
-
-        <!-- View Count Container -->
-        <div id="view-count-container"></div>
-        <!-- Rest of your content -->
 
         <!-- Search and Filters -->
         <div class="mb-4 flex flex-col gap-4 items-center">
@@ -371,6 +360,32 @@
             <!-- <div class="fixKeyboardLayout"></div> -->
         </div>
     </div>
+
+    <!-- GoatCounter integration -->
+    <script>
+        // Wait until the GoatCounter script is fully loaded
+        var t = setInterval(function() {
+            if (window.goatcounter && window.goatcounter.visit_count) {
+                clearInterval(t);
+                window.goatcounter.visit_count({
+                    append: '#view-count-container', // Append to the view count container
+                    style: `
+                        div { 
+                            border-color: #fff; 
+                            background-color: #222; 
+                            color: #fff; 
+                        }
+                        #gcvc-views {
+                            font-size: 24px;
+                            font-weight: bold;
+                        }
+                    `
+                });
+            }
+        }, 100);
+    </script>
+    <script data-goatcounter="https://dcref.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
 
     <script>
         const { createApp } = Vue;
@@ -574,23 +589,8 @@
             },
             mounted() {
                 this.loadData();
-                // GoatCounter: Display visit count
-                goatcounter.visit_count({
-                    append: '#view-count-container',
-                    style: `
-                        div { 
-                            border-color: #fff; 
-                            background-color: #222; 
-                            color: #fff; 
-                        }
-                        #gcvc-views {
-                            font-size: 24px;
-                            font-weight: bold;
-                        }
-                    `
-                });
             }
         }).mount('#app');
-    </script>           
+    </script>
 </body>
 </html>
