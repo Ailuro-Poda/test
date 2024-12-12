@@ -247,6 +247,11 @@
         <h1 class="text-4xl font-bold mb-4 text-center" onclick="location.reload();">الدليل الشامل لمشاهدة المحقق كونان</h1> 
         <br>
 
+        <!-- Visitor Counter Display -->
+        <div id="visitor-counter" class="text-center text-xl text-white mt-6">
+            <p>عدد الزوار: <span id="visit-count">...</span></p>
+        </div>
+
         <!-- Search and Filters -->
         <div class="mb-4 flex flex-col gap-4 items-center">
             <div class="flex gap-4 w-full justify-center">
@@ -369,7 +374,7 @@
                     replacementDict: {
                     "فلم": ["فيلم",],
                     },
-                    jsonUrl: "https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/episodess.json",
+                    jsonUrl: "https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/episodes.json",
                     showTooltip: false, // Controls tooltip visibility
                     episodeTypeFilter: 'All', // Default filter is "All"
                     episodes: [],
@@ -564,6 +569,13 @@
                 this.loadData();
             }
         }).mount('#app');
+    </script>
+    <!-- GoatCounter Script for Visit Count -->
+    <script>
+        // Append the visit count to the body (or another element by CSS selector)
+        window.goatcounter.visit_count({
+            append: '#visitor-counter #visit-count' // This is where the counter will be displayed
+        });
     </script>             
 </body>
 </html>
