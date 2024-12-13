@@ -5329,7 +5329,7 @@
   },
   {
     "EpisodeNumber": "868",
-    "EpisodeTitle": "صافرة المكتبة",
+    "EpisodeTitle": "متجر الكتب المُصفِّر",
     "EpisodeType": "ف",
     "EpisodeSpecial": ""
   },
@@ -5839,7 +5839,7 @@
   },
   {
     "EpisodeNumber": "951",
-    "EpisodeTitle": "صافرة المكتبة 2",
+    "EpisodeTitle": "متجر الكتب المُصفِّر 2",
     "EpisodeType": "ف",
     "EpisodeSpecial": ""
   },
@@ -6277,7 +6277,7 @@
   },
   {
     "EpisodeNumber": "1023",
-    "EpisodeTitle": "متجر الكتب المصفِّر 3",
+    "EpisodeTitle": "متجر الكتب المُصفِّر 3",
     "EpisodeType": "ف",
     "EpisodeSpecial": ""
   },
@@ -7035,6 +7035,12 @@
     "EpisodeNumber": "1145",
     "EpisodeTitle": "قضية التفجير المتسلسل للفنادق (الجزء الثاني)",
     "EpisodeType": "م",
+    "EpisodeSpecial": ""
+  },
+  {
+    "EpisodeNumber": "1146",
+    "EpisodeTitle": "متجر الكتب المُصفِّر 4",
+    "EpisodeType": "ف",
     "EpisodeSpecial": ""
   }
 ]
