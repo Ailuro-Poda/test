@@ -493,6 +493,10 @@
                                 <span v-else>لايوجد</span>
                             </p>
 
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeMangaQuoted !== ''" class="mb-2 text-xl">
+                                <span>الفصول المقتبسة: </span>{{ selectedEpisode.EpisodeMangaQuoted }}
+                            </p>
+
                             <fieldset v-if="selectedEpisode && selectedEpisode.EpisodeInfo !== ''" class="border p-2 rounded mb-2">
                                 <legend class="font-bold">القصة</legend>
                                 <p class="text-xl">{{ selectedEpisode.EpisodeInfo }}</p>
