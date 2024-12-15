@@ -497,9 +497,18 @@
                                 <span>الفصول المقتبسة: </span>{{ selectedEpisode.EpisodeMangaQuoted }}
                             </p>
 
-                            <fieldset v-if="selectedEpisode && selectedEpisode.EpisodeInfo !== ''" class="border p-2 rounded mb-2">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeSeason !== ''" class="mb-2 text-xl">
+                                <span>الموسم: </span>{{ selectedEpisode.EpisodeSeason }} ({{ selectedEpisode.EpisodeSeasonCount }})
+                            </p>
+
+                            <fieldset v-if="selectedEpisode && selectedEpisode.EpisodeStory !== ''" class="border p-2 rounded mb-2">
                                 <legend class="font-bold">القصة</legend>
-                                <p class="text-xl">{{ selectedEpisode.EpisodeInfo }}</p>
+                                <p class="text-xl">{{ selectedEpisode.EpisodeStory }}</p>
+                            </fieldset>
+
+                            <fieldset v-if="selectedEpisode && selectedEpisode.EpisodeNotes !== ''" class="border p-2 rounded mb-2 text-red-500">
+                                <legend class="font-bold">ملاحظات</legend>
+                                <p class="text-xl">{{ selectedEpisode.EpisodeNotes }}</p>
                             </fieldset>
                         </div>
                     </div>
