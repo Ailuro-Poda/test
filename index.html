@@ -274,7 +274,35 @@
                 padding: 10px;
             }
         }
-    </style>  
+    </style>
+
+<style>
+    .tooltip-container {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .tooltip-container .tooltip-text {
+        visibility: hidden;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 5px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%; /* Adjust based on position */
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    
+    .tooltip-container:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+    }
+    </style>
 </head>
 <body class="bg-gray-800 p-4">
     <div id="app" class="container mx-auto p-4 bg-slate-700 shadow-lg rounded">
@@ -501,29 +529,60 @@
                                 <span>الموسم: </span>{{ selectedEpisode.EpisodeSeason }} ({{ selectedEpisode.EpisodeSeasonCount }} حلقة)
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeEvents !== ''" class="mb-2 text-xl">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeEvents !== ''" class="mb-2 text-base">
                                 <span>الأحداث الموجودة: </span>
                                 <template v-for="(char, index) in selectedEpisode.EpisodeEvents" :key="index">
                                     <template v-if="char === 'س'">
-                                        <img src="https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/Plot-BO.png" alt="المنظمة السوداء، " class="inline-block h-6 w-6 mr-1">
+                                        <div class="tooltip-container inline-block h-6 w-6 mr-1">
+                                            <img src="https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/Plot-BO.png" 
+                                                 alt="المنظمة السوداء، " 
+                                                 class="inline-block h-6 w-6">
+                                            <span class="tooltip-text">المنظمة السوداء</span>
+                                        </div>
                                     </template>
                                     <template v-else-if="char === 'ج'">
-                                        <img src="https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/Plot-New.png" alt="شخصية جديدة، " class="inline-block h-6 w-6 mr-1">
+                                        <div class="tooltip-container inline-block h-6 w-6 mr-1">
+                                            <img src="https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/Plot-New.png" 
+                                                 alt="شخصية جديدة، " 
+                                                 class="inline-block h-6 w-6">
+                                            <span class="tooltip-text">شخصية جديدة</span>
+                                        </div>
                                     </template>
                                     <template v-else-if="char === 'ر'">
-                                        <img src="https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/Plot-Romance.png" alt="قصة رومانسية، " class="inline-block h-6 w-6 mr-1">
+                                        <div class="tooltip-container inline-block h-6 w-6 mr-1">
+                                            <img src="https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/Plot-Romance.png" 
+                                                 alt="قصة رومانسية، " 
+                                                 class="inline-block h-6 w-6">
+                                            <span class="tooltip-text">قصة رومانسية</span>
+                                        </div>
                                     </template>
                                     <template v-else-if="char === 'ت'">
-                                        <img src="https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/Plot-Char.png" alt="تطور شخصية، " class="inline-block h-6 w-6 mr-1">
+                                        <div class="tooltip-container inline-block h-6 w-6 mr-1">
+                                            <img src="https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/Plot-Char.png" 
+                                                 alt="تطور شخصية، " 
+                                                 class="inline-block h-6 w-6">
+                                            <span class="tooltip-text">تطور شخصية</span>
+                                        </div>
                                     </template>
                                     <template v-else-if="char === 'ط'">
-                                        <img src="https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/Plot-DB.png" alt="فريق المتحرين الصغار، " class="inline-block h-6 w-6 mr-1">
+                                        <div class="tooltip-container inline-block h-6 w-6 mr-1">
+                                            <img src="https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/Plot-DB.png" 
+                                                 alt="فريق المتحرين الصغار، " 
+                                                 class="inline-block h-6 w-6">
+                                            <span class="tooltip-text">فريق المتحرين الصغار</span>
+                                        </div>
                                     </template>
                                     <template v-else-if="char === 'م'">
-                                        <img src="https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/Plot-Past.png" alt="ماضي" class="inline-block h-6 w-6 mr-1">
+                                        <div class="tooltip-container inline-block h-6 w-6 mr-1">
+                                            <img src="https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/Plot-Past.png" 
+                                                 alt="ذكريات من الماضي" 
+                                                 class="inline-block h-6 w-6">
+                                            <span class="tooltip-text">ذكريات من الماضي</span>
+                                        </div>
                                     </template>
                                     <template v-else>
-                                    {{ char }} </template>
+                                        {{ char }}
+                                    </template>
                                 </template>
                             </p>
 
