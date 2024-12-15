@@ -506,9 +506,9 @@
                                 <p class="text-xl">{{ selectedEpisode.EpisodeStory }}</p>
                             </fieldset>
 
-                            <fieldset v-if="selectedEpisode && selectedEpisode.EpisodeNotes !== ''" class="border p-2 rounded mb-2 text-red-500">
+                            <fieldset v-if="selectedEpisode && selectedEpisode.EpisodeNotes !== ''" class="border border-red-500 p-2 rounded mb-2">
                                 <legend class="font-bold">ملاحظات</legend>
-                                <p class="text-xl">{{ selectedEpisode.EpisodeNotes }}</p>
+                                <p class="text-lg">{{ selectedEpisode.EpisodeNotes }}</p>
                             </fieldset>
                         </div>
                     </div>
