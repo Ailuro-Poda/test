@@ -276,32 +276,39 @@
         }
     </style>
 
-<style>
-    .tooltip-container {
-        position: relative;
-        display: inline-block;
-    }
-    
-    .tooltip-container .tooltip-text {
-        visibility: hidden;
-        background-color: #555;
-        color: #fff;
-        text-align: center;
-        border-radius: 5px;
-        padding: 5px;
-        position: absolute;
-        z-index: 1;
-        bottom: 125%; /* Adjust based on position */
-        left: 50%;
-        transform: translateX(-50%);
-        opacity: 0;
-        transition: opacity 0.3s;
-    }
-    
-    .tooltip-container:hover .tooltip-text {
-        visibility: visible;
-        opacity: 1;
-    }
+    <style>
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+            align-items: center;
+            cursor: pointer; /* Optional for hover-friendly styling */
+        }
+        
+        .tooltip-container .tooltip-text {
+            visibility: hidden;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px;
+            position: absolute;
+            z-index: 10;
+            white-space: nowrap;
+            bottom: 125%; /* Adjust positioning based on preference */
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.875rem; /* Tailwind's "text-sm" equivalent */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
+            border-width: 2px; /* Equivalent to border-2 in Tailwind */
+            border-color: #fbbf24; /* Equivalent to border-yellow-400 in Tailwind */
+        }
+        
+        .tooltip-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="bg-gray-800 p-4">
@@ -315,12 +322,10 @@
             حاول مرة أخرى
         </button>
     </div>
-        <h1 class="text-4xl font-bold mb-4 text-center" onclick="location.reload();" @mouseover="showTooltip6 = true" @mouseleave="showTooltip6 = false">
+
+        <h1 class="text-4xl font-bold mb-4 text-center" onclick="location.reload();">
             <span class="w-6 h-6 bg-sky-800 rounded-full"></span>
             <span>الدليل الشامل لمشاهدة المحقق كونان</span>
-            <span v-if="showTooltip6" class="absolute bg-gray-700 text-center text-white text-sm rounded p-1 mt-1 border-2 border-yellow-400">
-                اضغط هنا لتحديث الصفحة
-            </span>
         </h1>
         <br>
 
@@ -367,48 +372,51 @@
             <input v-model="searchQuery" class="border px-4 py-2 font-bold text-xl rounded w-full" placeholder="بحث...">
 
                         <!-- Centered Description Box for Colors and Their Names with "معاني الألوان" Legend -->
-            <fieldset class="my-4 w-full font-bold p-4 rounded border">
-                <legend class="px-2 font-bold text-white-600">معاني الألوان</legend>
-                <div class="flex flex-wrap gap-4 justify-center">
-                    <div class="flex items-center gap-2" @mouseover="showTooltip1 = true" @mouseleave="showTooltip1 = false">
-                        <span class="w-6 h-6 bg-teal-900 rounded-full"></span>
-                        <span>مانغا</span>
-                        <span v-if="showTooltip1" class="absolute bg-gray-700 -translate-y-11 text-white text-sm rounded p-1 mt-1 border-2 border-yellow-400">
-                            حلقات مأخوذة من المانغا الأصلية
-                        </span>
-                    </div>                                       
-                    <div class="flex items-center gap-2" @mouseover="showTooltip2 = true" @mouseleave="showTooltip2 = false">
-                        <span class="w-6 h-6 bg-red-950 rounded-full"></span>
-                        <span>فِلر</span>
-                        <span v-if="showTooltip2" class="absolute bg-gray-700 -translate-y-11 text-center translate-x-20 text-white text-sm rounded p-1 mt-1 border-2 border-yellow-400">
-                            حلقات لا تنتمي إلى القصة الأصلية ولا ترتبط بسير الأحداث
-                        </span>
-                    </div>                    
-                    <div class="flex items-center gap-2" @mouseover="showTooltip3 = true" @mouseleave="showTooltip3 = false">
-                        <span class="w-6 h-6 bg-yellow-900 rounded-full"></span>
-                        <span>الأفلام</span>
-                        <span v-if="showTooltip3" class="absolute bg-gray-700 -translate-y-11 translate-x-20 text-center text-white text-sm rounded p-1 mt-1 border-2 border-yellow-400">
-                            أفلام لا علاقة لها بالقصة الأساسية وعالمها منفصل
-                        </span>
-                    </div>
-                    
-                    <div class="flex items-center gap-2" @mouseover="showTooltip4 = true" @mouseleave="showTooltip4 = false">
-                        <span class="w-6 h-6 bg-sky-800 rounded-full"></span>
-                        <span>حلقة خاصة (ساعة)</span>
-                        <span v-if="showTooltip4" class="absolute bg-gray-700 -translate-y-11 translate-x-20 text-center text-white text-sm rounded p-1 mt-1 border-2 border-yellow-400">
-                            حلقات تمتد لفترة أطول من الحلقة العادية التي مدتها 24 دقيقة، حيث يصل بعضها إلى ساعة ونصف
-                        </span>
-                    </div>
-                    
-                    <div class="flex items-center gap-2" @mouseover="showTooltip5 = true" @mouseleave="showTooltip5 = false">
-                        <span class="w-6 h-6 bg-blue-950 rounded-full"></span>
-                        <span>حلقة خاصة (ساعتين)</span>
-                        <span v-if="showTooltip5" class="absolute bg-gray-700 -translate-y-11 translate-x-20 text-center text-white text-sm rounded p-1 mt-1 border-2 border-yellow-400">
-                            حلقات تمتد لفترة أطول من الحلقة العادية التي مدتها 24 دقيقة، حيث يصل بعضها إلى ساعتين ونصف
-                        </span>
-                    </div>                    
-                </div>
-            </fieldset>
+                        <fieldset class="my-4 w-full font-bold p-4 rounded border relative">
+                            <legend class="px-2 font-bold text-white-600">معاني الألوان</legend>
+                            <div class="flex flex-wrap gap-4 justify-center">
+                        
+                                <!-- Tooltip for Manga -->
+                                <div class="tooltip-container flex items-center gap-2">
+                                    <span class="w-6 h-6 bg-teal-900 rounded-full"></span>
+                                    <span>مانغا</span>
+                                    <span class="tooltip-text">حلقات مأخوذة من المانغا الأصلية</span>
+                                </div>
+                        
+                                <!-- Tooltip for Filler -->
+                                <div class="tooltip-container flex items-center gap-2">
+                                    <span class="w-6 h-6 bg-red-950 rounded-full"></span>
+                                    <span>فِلر</span>
+                                    <span class="tooltip-text">حلقات لا تنتمي إلى القصة الأصلية ولا ترتبط بسير الأحداث</span>
+                                </div>
+                        
+                                <!-- Tooltip for Movies -->
+                                <div class="tooltip-container flex items-center gap-2">
+                                    <span class="w-6 h-6 bg-yellow-900 rounded-full"></span>
+                                    <span>الأفلام</span>
+                                    <span class="tooltip-text">أفلام لا علاقة لها بالقصة الأساسية وعالمها منفصل</span>
+                                </div>
+                        
+                                <!-- Tooltip for Hourly Special -->
+                                <div class="tooltip-container flex items-center gap-2">
+                                    <span class="w-6 h-6 bg-sky-800 rounded-full"></span>
+                                    <span>حلقة خاصة (ساعة)</span>
+                                    <span class="tooltip-text">
+                                        حلقات تمتد لفترة أطول من الحلقة العادية التي مدتها 24 دقيقة، حيث يصل بعضها إلى ساعة ونصف
+                                    </span>
+                                </div>
+                        
+                                <!-- Tooltip for Two-Hour Special -->
+                                <div class="tooltip-container flex items-center gap-2">
+                                    <span class="w-6 h-6 bg-blue-950 rounded-full"></span>
+                                    <span>حلقة خاصة (ساعتين)</span>
+                                    <span class="tooltip-text">
+                                        حلقات تمتد لفترة أطول من الحلقة العادية التي مدتها 24 دقيقة، حيث يصل بعضها إلى ساعتين ونصف
+                                    </span>
+                                </div>
+                        
+                            </div>
+                        </fieldset>
 
 
                                 <!-- Pagination Controls -->
@@ -441,27 +449,64 @@
                         <th class="border border-gray-300 text-xl px-2 py-2 text-center w-1/6">
                             {{ episodeNumberHeader }}
                             <div class="relative">
-                                <div class="text-lg text-red-600 mt-1" @mouseenter="showTooltip = true" @mouseleave="showTooltip = false">({{ totalEpisodes }})</div>
-                                <!-- Tooltip -->
-                                <div v-if="showTooltip && selectedFilter === 'all' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات + الأفلام (مانغا + فِلر)</div>
-                                <div v-if="showTooltip && selectedFilter === 'all' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات + الأفلام (مانغا)</div>
-                                <div v-if="showTooltip && selectedFilter === 'all' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات + الأفلام (فِلر)</div>
-                                
-                                <div v-if="showTooltip && selectedFilter === 'anime' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات (مانغا + فِلر)</div>
-                                <div v-if="showTooltip && selectedFilter === 'anime' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات (مانغا)</div>
-                                <div v-if="showTooltip && selectedFilter === 'anime' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات (فِلر)</div>
-        
-                                <div v-if="showTooltip && selectedFilter === 'movies' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الأفلام (مانغا + فِلر)</div>
-                                <div v-if="showTooltip && selectedFilter === 'movies' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الأفلام (مانغا)</div>
-                                <div v-if="showTooltip && selectedFilter === 'movies' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الأفلام (فِلر)</div>
-        
-                                <div v-if="showTooltip && selectedFilter === 'hourly_special' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعة" (مانغا + فِلر)</div>
-                                <div v-if="showTooltip && selectedFilter === 'hourly_special' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعة" (مانغا)</div>
-                                <div v-if="showTooltip && selectedFilter === 'hourly_special' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعة" (فِلر)</div>
-        
-                                <div v-if="showTooltip && selectedFilter === 'two_hour_special' && episodeTypeFilter ==='All'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعتين" (مانغا + فِلر)</div>
-                                <div v-if="showTooltip && selectedFilter === 'two_hour_special' && episodeTypeFilter ==='Manga'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعتين (مانغا)</div>
-                                <div v-if="showTooltip && selectedFilter === 'two_hour_special' && episodeTypeFilter ==='Filler'" class="absolute bg-gray-800 text-white text-sm px-2 py-1 rounded shadow-lg mt-2">عدد الحلقات الخاصة "ساعتين" (فِلر)</div>
+                                <div 
+                                    class="tooltip-container text-lg text-red-600 mt-1"
+                                    @mouseenter="showTooltip = true"
+                                    @mouseleave="showTooltip = false"
+                                >
+                                    ({{ totalEpisodes }})
+                                    <!-- Dynamic Tooltip Text -->
+                                    <span 
+                                        v-if="showTooltip"
+                                        class="tooltip-text"
+                                    >
+                                        <template v-if="selectedFilter === 'all' && episodeTypeFilter === 'All'">
+                                            عدد الحلقات + الأفلام (مانغا + فِلر)
+                                        </template>
+                                        <template v-else-if="selectedFilter === 'all' && episodeTypeFilter === 'Manga'">
+                                            عدد الحلقات + الأفلام (مانغا)
+                                        </template>
+                                        <template v-else-if="selectedFilter === 'all' && episodeTypeFilter === 'Filler'">
+                                            عدد الحلقات + الأفلام (فِلر)
+                                        </template>
+                                        <template v-else-if="selectedFilter === 'anime' && episodeTypeFilter === 'All'">
+                                            عدد الحلقات (مانغا + فِلر)
+                                        </template>
+                                        <template v-else-if="selectedFilter === 'anime' && episodeTypeFilter === 'Manga'">
+                                            عدد الحلقات (مانغا)
+                                        </template>
+                                        <template v-else-if="selectedFilter === 'anime' && episodeTypeFilter === 'Filler'">
+                                            عدد الحلقات (فِلر)
+                                        </template>
+                                        <template v-else-if="selectedFilter === 'movies' && episodeTypeFilter === 'All'">
+                                            عدد الأفلام (مانغا + فِلر)
+                                        </template>
+                                        <template v-else-if="selectedFilter === 'movies' && episodeTypeFilter === 'Manga'">
+                                            عدد الأفلام (مانغا)
+                                        </template>
+                                        <template v-else-if="selectedFilter === 'movies' && episodeTypeFilter === 'Filler'">
+                                            عدد الأفلام (فِلر)
+                                        </template>
+                                        <template v-else-if="selectedFilter === 'hourly_special' && episodeTypeFilter === 'All'">
+                                            عدد الحلقات الخاصة "ساعة" (مانغا + فِلر)
+                                        </template>
+                                        <template v-else-if="selectedFilter === 'hourly_special' && episodeTypeFilter === 'Manga'">
+                                            عدد الحلقات الخاصة "ساعة" (مانغا)
+                                        </template>
+                                        <template v-else-if="selectedFilter === 'hourly_special' && episodeTypeFilter === 'Filler'">
+                                            عدد الحلقات الخاصة "ساعة" (فِلر)
+                                        </template>
+                                        <template v-else-if="selectedFilter === 'two_hour_special' && episodeTypeFilter === 'All'">
+                                            عدد الحلقات الخاصة "ساعتين" (مانغا + فِلر)
+                                        </template>
+                                        <template v-else-if="selectedFilter === 'two_hour_special' && episodeTypeFilter === 'Manga'">
+                                            عدد الحلقات الخاصة "ساعتين" (مانغا)
+                                        </template>
+                                        <template v-else-if="selectedFilter === 'two_hour_special' && episodeTypeFilter === 'Filler'">
+                                            عدد الحلقات الخاصة "ساعتين" (فِلر)
+                                        </template>
+                                    </span>
+                                </div>
                             </div>
                         </th>                
                         <th class="border border-gray-300 text-xl px-4 py-2 text-center w-5/6">
@@ -529,9 +574,9 @@
                                 <span>الموسم: </span>{{ selectedEpisode.EpisodeSeason }} ({{ selectedEpisode.EpisodeSeasonCount }} حلقة)
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeEvents !== ''" class="mb-2 text-base">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeEvents !== ''" class="mb-2 text-xl">
                                 <span>الأحداث الموجودة: </span>
-                                <template v-for="(char, index) in selectedEpisode.EpisodeEvents" :key="index">
+                                <template v-for="(char, index) in selectedEpisode.EpisodeEvents" :key="index" class="text-base">
                                     <template v-if="char === 'س'">
                                         <div class="tooltip-container inline-block h-6 w-6 mr-1">
                                             <img src="https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/Plot-BO.png" 
