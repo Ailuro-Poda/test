@@ -583,9 +583,8 @@
                             </p>
 
                             <p v-if="selectedEpisode && selectedEpisode.EpisodeRMDate !== ''" class="mb-2 text-xl">
-                                <span dir="ltr">:تاريخ إعادة الإنتاج</span>
-                                <span v-html="formatEpisodeRMDate(selectedEpisode.EpisodeRMDate)"></span>
-                            </p>                                                                                
+                                <span dir="ltr">:تاريخ إعادة الإنتاج</span> {{ selectedEpisode.EpisodeRMDate }}
+                            </p>
 
                             <p v-if="selectedEpisode && selectedEpisode.EpisodeEvents !== ''" class="mb-2 text-xl">
                                 <span>الأحداث الموجودة: </span>
@@ -965,13 +964,6 @@
                 closeModal() {
                     this.showModal = false;
                     this.selectedEpisode = null;
-                },
-
-                formatEpisodeRMDate(date) {
-                    if ((date.match(/\./g) || []).length === 2) {
-                        return date.replace(/\./g, '<br>'); // Replace dots with <br>
-                    }
-                    return date;
                 },
             },
             mounted() {
