@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="rtl">
 <head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KNKPH3ZEY5"></script>
@@ -567,7 +567,7 @@
                             </p>
 
                             <p v-if="selectedEpisode && selectedEpisode.EpisodeMangaQuoted !== ''" class="mb-2 text-xl">
-                                <span>الفصول المقتبسة: </span>{{ selectedEpisode.EpisodeMangaQuoted }}
+                                <span dir="ltr">:الفصول المقتبسة</span> {{ selectedEpisode.EpisodeMangaQuoted }}
                             </p>
 
                             <p v-if="selectedEpisode && selectedEpisode.EpisodeSeason !== ''" class="mb-2 text-xl">
@@ -575,15 +575,15 @@
                             </p>
 
                             <p v-if="selectedEpisode && selectedEpisode.EpisodeBCDate !== ''" class="mb-2 text-xl">
-                                <span>تاريخ العرض: </span>{{ selectedEpisode.EpisodeBCDate }}
+                                <span dir="ltr">:تاريخ العرض</span> {{ selectedEpisode.EpisodeBCDate }}
                             </p>
 
                             <p v-if="selectedEpisode && selectedEpisode.EpisodeRRDate !== ''" class="mb-2 text-xl">
-                                <span>تاريخ إعادة العرض: </span>{{ selectedEpisode.EpisodeRRDate }}
+                                <span dir="ltr">:تاريخ إعادة العرض</span> {{ selectedEpisode.EpisodeRRDate }}
                             </p>
 
                             <p v-if="selectedEpisode && selectedEpisode.EpisodeRMDate !== ''" class="mb-2 text-xl">
-                                <span>تاريخ إعادة الإنتاج: </span>{{ selectedEpisode.EpisodeRMDate }}
+                                <span dir="ltr">:تاريخ إعادة الإنتاج</span> {{ selectedEpisode.EpisodeRMDate }}
                             </p>
 
                             <p v-if="selectedEpisode && selectedEpisode.EpisodeEvents !== ''" class="mb-2 text-xl">
