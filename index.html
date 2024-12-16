@@ -591,7 +591,7 @@
                             </p>
 
                             <p v-if="selectedEpisode && selectedEpisode.EpisodeEvents !== ''" class="mb-2 text-lg">
-                                <span>الأحداث الموجودة: </span>
+                                <span>الأحداث : </span>
                                 <template v-for="(char, index) in selectedEpisode.EpisodeEvents" :key="index" class="text-lg">
                                     <template v-if="char === 'س'">
                                         <div class="tooltip-container inline-block h-6 w-6 mr-1">
