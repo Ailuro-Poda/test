@@ -574,6 +574,18 @@
                                 <span>الموسم: </span>{{ selectedEpisode.EpisodeSeason }} ({{ selectedEpisode.EpisodeSeasonCount }} حلقة)
                             </p>
 
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeBCDate !== ''" class="mb-2 text-xl">
+                                <span>تاريخ العرض: </span>{{ selectedEpisode.EpisodeBCDate }}
+                            </p>
+
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeRRDate !== ''" class="mb-2 text-xl">
+                                <span>تاريخ إعادة العرض: </span>{{ selectedEpisode.EpisodeRRDate }}
+                            </p>
+
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeRMDate !== ''" class="mb-2 text-xl">
+                                <span>تاريخ إعادة الإنتاج: </span>{{ selectedEpisode.EpisodeRMDate }}
+                            </p>
+
                             <p v-if="selectedEpisode && selectedEpisode.EpisodeEvents !== ''" class="mb-2 text-xl">
                                 <span>الأحداث الموجودة: </span>
                                 <template v-for="(char, index) in selectedEpisode.EpisodeEvents" :key="index" class="text-base">
