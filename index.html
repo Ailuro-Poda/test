@@ -586,6 +586,10 @@
                                 <span dir="ltr">:تاريخ إعادة الإنتاج</span> {{ selectedEpisode.EpisodeRMDate }}
                             </p>
 
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeRMDate2 !== ''" class="mb-2 text-xl">
+                                <span dir="ltr">:تاريخ إعادة الإنتاج الثاني</span> {{ selectedEpisode.EpisodeRMDate2 }}
+                            </p>
+
                             <p v-if="selectedEpisode && selectedEpisode.EpisodeEvents !== ''" class="mb-2 text-xl">
                                 <span>الأحداث الموجودة: </span>
                                 <template v-for="(char, index) in selectedEpisode.EpisodeEvents" :key="index" class="text-base">
@@ -673,7 +677,7 @@
                             </fieldset>
 
                             <fieldset v-if="selectedEpisode && selectedEpisode.EpisodeNotes !== ''" class="border border-red-500 p-2 rounded mb-2">
-                                <legend class="font-bold">ملاحظات</legend>
+                                <legend class="font-bold">ملاحظة</legend>
                                 <p class="text-lg">{{ selectedEpisode.EpisodeNotes }}</p>
                             </fieldset>
                         </div>
