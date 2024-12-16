@@ -536,13 +536,13 @@
                                 </button>
                             </div>
                     
-                            <p v-if="selectedEpisode" class="mb-2 text-base">
+                            <p v-if="selectedEpisode" class="mb-2 text-lg">
                             <span v-if="selectedEpisode.EpisodeNumber.includes('الفيلم')">رقم الفيلم:</span>
                             <span v-else>رقم الحلقة:</span>
                             {{ selectedEpisode.EpisodeNumber.replace('الفيلم', '') }}
                             </p>
                     
-                            <p v-if="selectedEpisode" class="mb-2 text-base">
+                            <p v-if="selectedEpisode" class="mb-2 text-lg">
                                 <span v-if="selectedEpisode.EpisodeNumber.includes('الفيلم')">نوع الفيلم: </span>
                                 <span v-else>نوع الحلقة: </span>
                                 <span v-if="selectedEpisode.EpisodeNumber.includes('الفيلم')">
