@@ -536,13 +536,13 @@
                                 </button>
                             </div>
                     
-                            <p v-if="selectedEpisode" class="mb-2 text-xl">
+                            <p v-if="selectedEpisode" class="mb-2 text-base">
                             <span v-if="selectedEpisode.EpisodeNumber.includes('الفيلم')">رقم الفيلم:</span>
                             <span v-else>رقم الحلقة:</span>
                             {{ selectedEpisode.EpisodeNumber.replace('الفيلم', '') }}
                             </p>
                     
-                            <p v-if="selectedEpisode" class="mb-2 text-xl">
+                            <p v-if="selectedEpisode" class="mb-2 text-base">
                                 <span v-if="selectedEpisode.EpisodeNumber.includes('الفيلم')">نوع الفيلم: </span>
                                 <span v-else>نوع الحلقة: </span>
                                 <span v-if="selectedEpisode.EpisodeNumber.includes('الفيلم')">
@@ -559,38 +559,38 @@
                                 </span>
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeSpecial !== ''" class="mb-2 text-xl">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeSpecial !== ''" class="mb-2 text-base">
                                 <span>خاصة: </span>
                                 <span v-if="selectedEpisode.EpisodeSpecial === '1'"> (ساعة)</span>
                                 <span v-else-if="selectedEpisode.EpisodeSpecial === '2'"> (ساعتين)</span>
                                 <span v-else>لايوجد</span>
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeMangaQuoted !== ''" class="mb-2 text-xl">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeMangaQuoted !== ''" class="mb-2 text-base">
                                 <span dir="ltr">:الفصول المقتبسة</span> {{ selectedEpisode.EpisodeMangaQuoted }}
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeSeason !== ''" class="mb-2 text-xl">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeSeason !== ''" class="mb-2 text-base">
                                 <span>الموسم: </span>{{ selectedEpisode.EpisodeSeason }} ({{ selectedEpisode.EpisodeSeasonCount }} حلقة)
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeBCDate !== ''" class="mb-2 text-xl">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeBCDate !== ''" class="mb-2 text-base">
                                 <span dir="ltr">:تاريخ العرض</span> {{ selectedEpisode.EpisodeBCDate }}
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeRRDate !== ''" class="mb-2 text-xl">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeRRDate !== ''" class="mb-2 text-base">
                                 <span dir="ltr">:تاريخ إعادة العرض</span> {{ selectedEpisode.EpisodeRRDate }}
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeRMDate !== ''" class="mb-2 text-xl">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeRMDate !== ''" class="mb-2 text-base">
                                 <span dir="ltr">:تاريخ إعادة الإنتاج</span> {{ selectedEpisode.EpisodeRMDate }}
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeRMDate2 !== ''" class="mb-2 text-xl">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeRMDate2 !== ''" class="mb-2 text-base">
                                 <span dir="ltr">:تاريخ إعادة الإنتاج الثاني</span> {{ selectedEpisode.EpisodeRMDate2 }}
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeEvents !== ''" class="mb-2 text-xl">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeEvents !== ''" class="mb-2 text-base">
                                 <span>الأحداث الموجودة: </span>
                                 <template v-for="(char, index) in selectedEpisode.EpisodeEvents" :key="index" class="text-base">
                                     <template v-if="char === 'س'">
