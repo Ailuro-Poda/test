@@ -559,40 +559,40 @@
                                 </span>
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeSpecial !== ''" class="mb-2 text-base">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeSpecial !== ''" class="mb-2 text-lg">
                                 <span>خاصة: </span>
                                 <span v-if="selectedEpisode.EpisodeSpecial === '1'"> (ساعة)</span>
                                 <span v-else-if="selectedEpisode.EpisodeSpecial === '2'"> (ساعتين)</span>
                                 <span v-else>لايوجد</span>
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeMangaQuoted !== ''" class="mb-2 text-base">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeMangaQuoted !== ''" class="mb-2 text-lg">
                                 <span dir="ltr">:الفصول المقتبسة</span> {{ selectedEpisode.EpisodeMangaQuoted }}
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeSeason !== ''" class="mb-2 text-base">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeSeason !== ''" class="mb-2 text-lg">
                                 <span>الموسم: </span>{{ selectedEpisode.EpisodeSeason }} ({{ selectedEpisode.EpisodeSeasonCount }} حلقة)
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeBCDate !== ''" class="mb-2 text-base">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeBCDate !== ''" class="mb-2 text-lg">
                                 <span dir="ltr">:تاريخ العرض</span> {{ selectedEpisode.EpisodeBCDate }}
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeRRDate !== ''" class="mb-2 text-base">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeRRDate !== ''" class="mb-2 text-lg">
                                 <span dir="ltr">:تاريخ إعادة العرض</span> {{ selectedEpisode.EpisodeRRDate }}
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeRMDate !== ''" class="mb-2 text-base">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeRMDate !== ''" class="mb-2 text-lg">
                                 <span dir="ltr">:تاريخ إعادة الإنتاج</span> {{ selectedEpisode.EpisodeRMDate }}
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeRMDate2 !== ''" class="mb-2 text-base">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeRMDate2 !== ''" class="mb-2 text-lg">
                                 <span dir="ltr">:إعادة الإنتاج الثاني</span> {{ selectedEpisode.EpisodeRMDate2 }}
                             </p>
 
-                            <p v-if="selectedEpisode && selectedEpisode.EpisodeEvents !== ''" class="mb-2 text-base">
+                            <p v-if="selectedEpisode && selectedEpisode.EpisodeEvents !== ''" class="mb-2 text-lg">
                                 <span>الأحداث الموجودة: </span>
-                                <template v-for="(char, index) in selectedEpisode.EpisodeEvents" :key="index" class="text-base">
+                                <template v-for="(char, index) in selectedEpisode.EpisodeEvents" :key="index" class="text-lg">
                                     <template v-if="char === 'س'">
                                         <div class="tooltip-container inline-block h-6 w-6 mr-1">
                                             <img src="https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/Plot-BO.png" 
@@ -673,7 +673,7 @@
 
                             <fieldset v-if="selectedEpisode && selectedEpisode.EpisodeStory !== ''" class="border p-2 rounded mb-2">
                                 <legend class="font-bold">القصة</legend>
-                                <p class="text-xl">{{ selectedEpisode.EpisodeStory }}</p>
+                                <p class="text-lg">{{ selectedEpisode.EpisodeStory }}</p>
                             </fieldset>
 
                             <fieldset v-if="selectedEpisode && selectedEpisode.EpisodeNotes !== ''" class="border border-red-500 p-2 rounded mb-2">
