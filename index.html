@@ -339,9 +339,15 @@
                     <option value="hourly_special">خاصة (ساعة)</option>
                     <option value="two_hour_special">خاصة (ساعتين)</option>
                 </select>
-
+            
                 <fieldset class="border border-gray-300 rounded p-4 w-1/2">
-                    <legend class="px-2 font-bold text-white-600">{{ episodeTypeLegend }}</legend>
+                    <legend class="px-2 font-bold text-white-600">{{ episodeTypeLegend }}
+                        <button 
+                            class="bg-blue-500 text-white font-bold py-2 px-1 rounded hover:bg-blue-700 transition" 
+                            @click="openEmptyPopup">
+                            المزيد
+                        </button>
+                    </legend>
                     <div class="flex items-center text-blue font-bold gap-4 justify-center">
                         <label>
                             <input type="radio" v-model="episodeTypeFilter" value="All" checked class="scale-150">
@@ -357,9 +363,9 @@
                             </label>
                         </div>
                         <div :class="{
-                            'p-1': episodeTypeFilter !== 'Manga', 
-                            'p-1': episodeTypeFilter === 'Manga'
-                        }">
+                                'p-1': episodeTypeFilter !== 'Manga', 
+                                'p-1': episodeTypeFilter === 'Manga'
+                            }">
                             <label :class="{'bg-red-950 p-1 text-white rounded': episodeTypeFilter === 'Filler'}">
                                 <input type="radio" v-model="episodeTypeFilter" value="Filler" class="scale-150">
                                 فِلر
@@ -368,6 +374,21 @@
                     </div>
                 </fieldset>
             </div>
+            
+            <!-- Empty popup window -->
+            <div 
+                v-if="showEmptyPopup" 
+                class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div class="bg-sky-900 p-6 rounded shadow-lg w-1/3">
+                    <h2 class="text-xl font-bold mb-4">نافذة فارغة</h2>
+                    <p class="text-gray-600">هذه نافذة فارغة لإضافة محتوى لاحقًا.</p>
+                    <button 
+                        class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-700 transition mt-4" 
+                        @click="closeEmptyPopup">
+                        إغلاق
+                    </button>
+                </div>
+            </div>            
 
             <input v-model="searchQuery" class="border px-4 py-2 font-bold text-xl rounded w-full" placeholder="بحث...">
 
@@ -745,6 +766,7 @@
                     pageSize: 15,
                     showModal: false,
                     selectedEpisode: null,
+                    showEmptyPopup: false, // Controls the visibility of the empty popup
                 };
             },
             computed: {
@@ -982,6 +1004,13 @@
                 closeModal() {
                     this.showModal = false;
                     this.selectedEpisode = null;
+                },
+
+                openEmptyPopup() {
+                    this.showEmptyPopup = true; // Show the popup
+                },
+                closeEmptyPopup() {
+                    this.showEmptyPopup = false; // Hide the popup
                 },
             },
             mounted() {
