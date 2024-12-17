@@ -15,11 +15,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <title>.</title>
     <script>
-        // function isInput(event) {
-        //     return event.target.tagName === 'INPUT' ||
-        //         event.target.tagName === 'TEXTAREA' ||
-        //         event.target.isContentEditable; // Handle contenteditable elements
-        // }
+        function isInput(event) {
+            return event.target.tagName === 'INPUT' ||
+                event.target.tagName === 'TEXTAREA' ||
+                event.target.isContentEditable; // Handle contenteditable elements
+        }
 
         document.addEventListener('contextmenu', (event) => {
             if (!isInput(event)) {
@@ -39,12 +39,12 @@
             }
         });
     
-            //Disable Ctrl+U (View Source), Ctrl+Shift+I (DevTools)
-            if (event.ctrlKey && 
-                (event.key.toLowerCase() === 'u' || 
-                (event.shiftKey && event.key.toLowerCase() === 'i'))) {
-                event.preventDefault();
-            }
+            // Disable Ctrl+U (View Source), Ctrl+Shift+I (DevTools)
+            // if (event.ctrlKey && 
+            //     (event.key.toLowerCase() === 'u' || 
+            //     (event.shiftKey && event.key.toLowerCase() === 'i'))) {
+            //     event.preventDefault();
+            // }
     </script>    
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
     <script src="episodes.json" type="application/json"></script>
@@ -73,14 +73,14 @@
             -ms-user-select: none; /* For IE */
         }
 
-        /* Allow text selection specifically in the search input*/
-        /* input[type="text"], input[type="search"], textarea, [contenteditable="true"], input.v-model {
-            user-select: text;
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            -ms-user-select: text;
+         /* Allow text selection specifically in the search input */
+        input[type="text"], input[type="search"], textarea, [contenteditable="true"], input.v-model {
+            user-select: text; /* Enable text selection for input fields */
+            -webkit-user-select: text; /* For WebKit browsers (Safari, Chrome) */
+            -moz-user-select: text; /* For Firefox */
+            -ms-user-select: text; /* For Internet Explorer */
             pointer-events: auto;
-        } */
+        }
     
         /* Disable drag functionality */
         img, a {
@@ -412,17 +412,21 @@
                         <legend class="font-bold text-lg px-2 mb-2">حسب الشخصية</legend>
                     </fieldset>
 
-                    <button 
-                        class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-700 transition mt-4" 
-                        @click="closeEmptyPopup">
-                        إغلاق
-                    </button>
+                    <div class="text-center mt-4">
+                        <button 
+                            class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-700 transition mt-4" 
+                            @click="closeEmptyPopup">
+                            إغلاق
+                        </button>
 
-                    <button 
-                        class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition mt-4" 
-                        @click="resetFilters">
-                        إعادة تعيين
-                    </button>
+                        <br />
+                        
+                        <button 
+                            class="bg-blue-500 text-white font-bold py-2 px-4 mx-2 rounded hover:bg-blue-700 transition mt-4" 
+                            @click="resetFilters">
+                            إعادة تعيين
+                        </button>
+                    </div>
 
                 </div>
             </div>            
@@ -579,7 +583,8 @@
                             <td :class="[getBackgroundColor(episode), 'border', 'border-gray-300', 'px-2', 'text-lg', 'font-bold', 'py-2', 'text-center']">
                                 {{ episode.EpisodeNumber }}
                             </td>
-                            <td class="border border-gray-300 px-4 text-lg font-bold py-2 text-center cursor-pointer" @click="openModal(episode)">{{ episode.EpisodeTitle }}</td>
+                            <td class="border border-gray-300 px-4 text-lg font-bold py-2 text-center cursor-pointer">{{ episode.EpisodeTitle }}</td>
+                            <!-- <td class="border border-gray-300 px-4 text-lg font-bold py-2 text-center cursor-pointer" @click="openModal(episode)">{{ episode.EpisodeTitle }}</td> -->
                         </tr>
                     </tbody>
             
@@ -756,6 +761,7 @@
                     </div>
             </table>
 
+
             <!-- Pagination Controls -->
             <div class="flex flex-wrap justify-between items-center mt-4" id="pagination-buttons">
                 <span class="font-bold" id="pagination-buttons">صفحة</span>
@@ -766,6 +772,32 @@
                 </select>
                 <span class="font-bold" id="pagination-buttons">من {{ totalPages }}</span>
             </div>
+
+            <!-- Page Size Controls (Right) -->
+            <!-- <div class="text-center font-bold justify-center mt-6">
+                <span class="font-bold">عدد الصفوف في الصفحة:</span>
+                <label class="inline-flex items-center mx-1">
+                    <input type="radio" v-model="pageSize" :value="5" class="form-radio text-blue-500 mx-1" />
+                    <span class="ml-2">5</span>
+                </label>
+                <label class="inline-flex items-center mx-1">
+                    <input type="radio" v-model="pageSize" :value="10" class="form-radio text-blue-500 mx-1" />
+                    <span class="ml-2">10</span>
+                </label>
+                <label class="inline-flex items-center mx-1">
+                    <input type="radio" v-model="pageSize" :value="15" class="form-radio text-blue-500 mx-1" />
+                    <span class="ml-2">15</span>
+                </label>
+                <label class="inline-flex items-center mx-1">
+                    <input type="radio" v-model="pageSize" :value="20" class="form-radio text-blue-500 mx-1" />
+                    <span class="ml-2">20</span>
+                </label>
+                <label class="inline-flex items-center mx-1">
+                    <input type="radio" v-model="pageSize" :value="25" class="form-radio text-blue-500 mx-1" />
+                    <span class="ml-2">25</span>
+                </label>
+            </div> -->
+
             <!-- <div class="fixKeyboardLayout"></div> -->
         </div>
     </div>
