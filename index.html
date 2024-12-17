@@ -39,12 +39,12 @@
             }
         });
     
-            // Disable Ctrl+U (View Source), Ctrl+Shift+I (DevTools)
-            // if (event.ctrlKey && 
-            //     (event.key.toLowerCase() === 'u' || 
-            //     (event.shiftKey && event.key.toLowerCase() === 'i'))) {
-            //     event.preventDefault();
-            // }
+            //Disable Ctrl+U (View Source), Ctrl+Shift+I (DevTools)
+            if (event.ctrlKey && 
+                (event.key.toLowerCase() === 'u' || 
+                (event.shiftKey && event.key.toLowerCase() === 'i'))) {
+                event.preventDefault();
+            }
     </script>    
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
     <script src="episodes.json" type="application/json"></script>
@@ -417,6 +417,13 @@
                         @click="closeEmptyPopup">
                         إغلاق
                     </button>
+
+                    <button 
+                        class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition mt-4" 
+                        @click="resetFilters">
+                        إعادة تعيين
+                    </button>
+
                 </div>
             </div>            
 
@@ -1072,6 +1079,12 @@
                 },
                 closeEmptyPopup() {
                     this.showEmptyPopup = false; // Hide the popup
+                },
+
+                resetFilters() {
+                    this.filterBlackOrganization = false;
+                    this.filterDetectiveBoys = false;
+                    this.filterScaryEpisodes = false;
                 },
             },
             mounted() {
