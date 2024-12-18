@@ -402,7 +402,12 @@
                         <legend class="font-bold text-lg px-2 mb-2">حسب المشهد</legend>
                         <label class="flex items-center space-x-2">
                             <input type="checkbox" v-model="filterScaryEpisodes" class="scale-150">
-                            <span class="px-2">رعب ({{ ScaryEpisodesCount }})</span>
+                            <span class="px-2">مرعب ({{ ScaryEpisodesCount }})</span>
+                        </label>
+                        <br />
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" v-model="filterSadyEpisodes" class="scale-150">
+                            <span class="px-2">حزين ({{ SadyEpisodesCount }})</span>
                         </label>
                     </fieldset>
 
@@ -838,6 +843,7 @@
                     filterBlackOrganization: false, // Checkbox state
                     filterDetectiveBoys: false,
                     filterScaryEpisodes: false,
+                    filterSadyEpisodes: false,
                 };
             },
             computed: {
@@ -873,6 +879,11 @@
                         filteredByType = filteredByType.filter(episode => episode.EpisodeEventsAdvanced.includes("رعب"));
                     }
 
+                    // Filter for Sady Episodes
+                    if (this.filterSadyEpisodes) {
+                        filteredByType = filteredByType.filter(episode => episode.EpisodeEventsAdvanced.includes("حزن"));
+                    }
+
                     // Apply other filters (e.g., category and search query)
                     return filteredByType
                         .filter(episode => {
@@ -902,6 +913,10 @@
 
                 ScaryEpisodesCount() {
                     return this.episodes.filter(episode => episode.EpisodeEventsAdvanced.includes("رعب")).length;
+                },
+
+                SadyEpisodesCount() {
+                    return this.episodes.filter(episode => episode.EpisodeEventsAdvanced.includes("حزن")).length;
                 },
                 totalPages() {
                     return Math.ceil(this.filteredEpisodes.length / this.pageSize);
@@ -1116,6 +1131,7 @@
                     this.filterBlackOrganization = false;
                     this.filterDetectiveBoys = false;
                     this.filterScaryEpisodes = false;
+                    this.filterSadyEpisodes = false;
                 },
             },
             mounted() {
