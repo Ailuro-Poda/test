@@ -343,7 +343,7 @@
                 <fieldset class="border border-gray-300 rounded p-4 w-1/2">
                     <legend class="px-2 font-bold text-white-600">{{ episodeTypeLegend }}
                         <!-- <button 
-                            class="bg-blue-500 text-white font-bold py-2 px-1 rounded hover:bg-blue-700 transition" 
+                            class="bg-orange-500 text-white font-bold py-2 px-1 rounded hover:bg-orange-800 transition" 
                             @click="openEmptyPopup">
                             المزيد
                         </button> -->
@@ -377,190 +377,231 @@
             
             <!-- Empty popup window -->
             <div v-if="showEmptyPopup" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
-                <div class="relative bg-sky-900 p-6 rounded shadow-lg w-4/5 md:w-1/2 lg:w-1/3 max-h-[80vh] overflow-y-auto">
-                    <h2 class="text-xl font-bold mb-4 relative">
-                        <!-- Close Button in the Top Left of the Title -->
-                        <button 
-                            @click="closeEmptyPopup" 
-                            class="absolute top-0 left-0 text-red-600 hover:text-yellow-300 font-bold focus:outline-none">
-                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                        تصفية موسعة 
-                        <span class="text-red-500 font-bold text-xl">({{ totalEpisodes }})</span>
-                    </h2>
-                    <!-- <p class="text-gray-600">هذه نافذة فارغة لإضافة محتوى لاحقًا.</p> -->
-
-                    <fieldset class="border p-4 rounded">
-                        <legend class="font-bold text-lg px-2 mb-2">حسب النوع</legend>
-                        <label class="flex items-center space-x-2">
-                            <input type="radio" v-model="episodeTypeFilter" value="All" class="scale-150">
-                            <span class="px-2">الكل ({{ episodeTypeAllCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="radio" v-model="episodeTypeFilter" value="Manga" class="scale-150">
-                            <span class="px-2">مانغا ({{ episodeTypeMangaCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="radio" v-model="episodeTypeFilter" value="Filler" class="scale-150" />
-                            <span class="px-2">فِلر ({{ episodeTypeFillerCount }})</span>
-                        </label>
-                    </fieldset>
-
-                    <br />
-
-                    <fieldset class="border p-4 rounded">
-                        <legend class="font-bold text-lg px-2 mb-2">حسب المجموعة</legend>
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterBlackOrganization" class="scale-150">
-                            <span class="px-2">المنظمة السوداء ({{ blackOrganizationCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterDetectiveBoys" class="scale-150" />
-                            <span class="px-2">فريق المتحرين الصغار ({{ detectiveBoysCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterFBI" class="scale-150" />
-                            <span class="px-2">مكتب التحقيقات الفيدرالي ({{ FBICount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterPSB" class="scale-150" />
-                            <span class="px-2">مكتب الأمن العام ({{ PSBCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterPoliceAcademy" class="scale-150" />
-                            <span class="px-2">أكاديمية الشرطة ({{ policeAcademyCount }})</span>
-                        </label>
-                    </fieldset>
-
-                    <br />
-
-                    <fieldset class="border p-4 rounded">
-                        <legend class="font-bold text-lg px-2 mb-2">حسب المشهد</legend>
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterScaryEpisodes" class="scale-150">
-                            <span class="px-2">مرعب ({{ ScaryEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterSadyEpisodes" class="scale-150">
-                            <span class="px-2">حزين ({{ SadyEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterRomanceEpisodes" class="scale-150">
-                            <span class="px-2">رومانسي ({{ RomanceEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterNewCharacter" class="scale-150">
-                            <span class="px-2">شخصية جديدة ({{ NewCharacterEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterDevelopmentCharacter" class="scale-150">
-                            <span class="px-2">تطور الشخصية ({{ DevelopmentCharacterEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterFlashBackEpisodes" class="scale-150">
-                            <span class="px-2">ذكريات من الماضي ({{ FlashBackEpisodesCount }})</span>
-                        </label>
-                    </fieldset>
-
-                    <br />
-
-                    <fieldset class="border p-4 rounded">
-                        <legend class="font-bold text-lg px-2 mb-2">حسب الشخصية</legend>
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterKaitoKidEpisodes" class="scale-150">
-                            <span class="px-2">كايتو كيد ({{ KaitoKidEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterHeijiHattoriEpisodes" class="scale-150">
-                            <span class="px-2">هيجي هاتوري ({{ HeijiHattoriEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterAkaiShuichiEpisodes" class="scale-150">
-                            <span class="px-2">أكاي شويتشي ({{ AkaiShuichiEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterAmuroToruEpisodes" class="scale-150">
-                            <span class="px-2">أمورو تورو ({{ AmuroToruEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterShinichiKudoEpisodes" class="scale-150">
-                            <span class="px-2">شينتشي كودو ({{ ShinichiKudoEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterOkiyaSubaruEpisodes" class="scale-150">
-                            <span class="px-2">أوكيا سوبارو ({{ OkiyaSubaruEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterSeraMasumiEpisodes" class="scale-150">
-                            <span class="px-2">سيرا ماسومي ({{ SeraMasumiEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterGinEpisodes" class="scale-150">
-                            <span class="px-2">جين ({{ GinEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterKazuhaToyamaEpisodes" class="scale-150">
-                            <span class="px-2">كازوها توياما ({{ KazuhaToyamaEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterMarySeraEpisodes" class="scale-150">
-                            <span class="px-2">ميري سيرا ({{ MarySeraEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterHanedaShukichiEpisodes" class="scale-150">
-                            <span class="px-2">هانيدا شوكيتشي ({{ HanedaShukichiEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterYusakuKudoEpisodes" class="scale-150">
-                            <span class="px-2">يوساكو كودو ({{ YusakuKudoEpisodesCount }})</span>
-                        </label>
-                        <br />
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" v-model="filterWakasaRumiEpisodes" class="scale-150">
-                            <span class="px-2">واكاسا رومي ({{ WakasaRumiEpisodesCount }})</span>
-                        </label>
-                    </fieldset>
-
-                    <div class="text-center mt-4">
-                        <button 
-                            class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-700 transition mt-4" 
-                            @click="closeEmptyPopup">
-                            إغلاق
-                        </button>
-
-                        <!-- <br /> -->
-                        
-                        <button 
-                            class="bg-blue-500 text-white font-bold py-2 px-4 mx-2 rounded hover:bg-blue-700 transition mt-4" 
-                            @click="resetFilters">
-                            إعادة تعيين
-                        </button>
+                <div class="relative bg-sky-900 rounded shadow-lg w-4/5 md:w-1/2 lg:w-1/3 max-h-[80vh] overflow-hidden flex flex-col">
+                    <!-- Sticky Header Section -->
+                    <div class="sticky top-0 z-50 bg-sky-900 p-4">
+                        <h2 class="text-xl font-bold text-orange-400 relative">
+                            <!-- Close Button in the Top Left of the Title -->
+                            <button 
+                                @click="closeEmptyPopup" 
+                                class="absolute top-0 left-0 text-yellow-300 hover:text-yellow-600 font-bold focus:outline-none">
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                            تصفية موسعة 
+                            <span class="text-red-500 font-bold text-xl">({{ totalEpisodes }})</span>
+                    
+                            <!-- Reset Button (Refresh Icon with Image) -->
+                            <button 
+                                @click="resetFilters" 
+                                class="absolute top-0 left-10 text-yellow-300 hover:text-yellow-600 font-bold focus:outline-none">
+                                <img src="https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/redo.png" alt="Reset" class="h-6 w-6"/>
+                            </button>
+                        </h2>
                     </div>
+                    
+                    <!-- Scrollable Content -->
+                    <div class="overflow-y-auto p-4 flex-1">
+                        <fieldset class="border p-4 rounded">
+                            <legend class="font-bold text-lg px-2 mb-2">حسب التصنيف</legend>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" v-model="selectedFilter" value="all" class="scale-150">
+                                <span class="px-2 font-bold">الكل ({{ episodeTypeAllCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" v-model="selectedFilter" value="anime" class="scale-150">
+                                <span class="px-2 font-bold">حلقات ({{ episodeTypeAnimeCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" v-model="selectedFilter" value="movies" class="scale-150" />
+                                <span class="px-2 font-bold">الأفلام ({{ episodeTypeMovieCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" v-model="selectedFilter" value="hourly_special" class="scale-150" />
+                                <span class="px-2 font-bold">خاصة (ساعة) ({{ episodeTypeHourlySpecialCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" v-model="selectedFilter" value="two_hour_special" class="scale-150" />
+                                <span class="px-2 font-bold">خاصة (ساعتين) ({{ episodeTypeTwoHourSpecialCount }})</span>
+                            </label>
+                        </fieldset>
 
+                        <br />
+
+                        <fieldset class="border p-4 rounded">
+                            <legend class="font-bold text-lg px-2 mb-2">حسب النوع</legend>
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" v-model="episodeTypeFilter" value="All" class="scale-150">
+                                <span class="px-2 font-bold">الكل ({{ episodeTypeAllCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" v-model="episodeTypeFilter" value="Manga" class="scale-150">
+                                <span class="px-2 font-bold">مانغا ({{ episodeTypeMangaCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="radio" v-model="episodeTypeFilter" value="Filler" class="scale-150" />
+                                <span class="px-2 font-bold">فِلر ({{ episodeTypeFillerCount }})</span>
+                            </label>
+                        </fieldset>
+
+                        <br />
+
+                        <fieldset class="border p-4 rounded">
+                            <legend class="font-bold text-lg px-2 mb-2">حسب المجموعة</legend>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterBlackOrganization" class="scale-150">
+                                <span class="px-2 font-bold">المنظمة السوداء ({{ blackOrganizationCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterDetectiveBoys" class="scale-150" />
+                                <span class="px-2 font-bold">فريق المتحرين الصغار ({{ detectiveBoysCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterFBI" class="scale-150" />
+                                <span class="px-2 font-bold">مكتب التحقيقات الفيدرالي ({{ FBICount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterPSB" class="scale-150" />
+                                <span class="px-2 font-bold">مكتب الأمن العام ({{ PSBCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterPoliceAcademy" class="scale-150" />
+                                <span class="px-2 font-bold">أكاديمية الشرطة ({{ policeAcademyCount }})</span>
+                            </label>
+                        </fieldset>
+
+                        <br />
+
+                        <fieldset class="border p-4 rounded">
+                            <legend class="font-bold text-lg px-2 mb-2">حسب المشهد</legend>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterScaryEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">مرعب ({{ ScaryEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterSadyEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">حزين ({{ SadyEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterRomanceEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">رومانسي ({{ RomanceEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterNewCharacter" class="scale-150">
+                                <span class="px-2 font-bold">شخصية جديدة ({{ NewCharacterEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterDevelopmentCharacter" class="scale-150">
+                                <span class="px-2 font-bold">تطور الشخصية ({{ DevelopmentCharacterEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterFlashBackEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">ذكريات من الماضي ({{ FlashBackEpisodesCount }})</span>
+                            </label>
+                        </fieldset>
+
+                        <br />
+
+                        <fieldset class="border p-4 rounded">
+                            <legend class="font-bold text-lg px-2 mb-2">حسب الشخصية</legend>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterKaitoKidEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">كايتو كيد ({{ KaitoKidEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterHeijiHattoriEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">هيجي هاتوري ({{ HeijiHattoriEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterAkaiShuichiEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">أكاي شويتشي ({{ AkaiShuichiEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterAmuroToruEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">أمورو تورو ({{ AmuroToruEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterShinichiKudoEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">شينتشي كودو ({{ ShinichiKudoEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterOkiyaSubaruEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">أوكيا سوبارو ({{ OkiyaSubaruEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterSeraMasumiEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">ماسومي سيرا ({{ SeraMasumiEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterGinEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">جين ({{ GinEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterKazuhaToyamaEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">كازوها توياما ({{ KazuhaToyamaEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterMarySeraEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">ميري سيرا ({{ MarySeraEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterHanedaShukichiEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">هانيدا شوكيتشي ({{ HanedaShukichiEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterYusakuKudoEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">يوساكو كودو ({{ YusakuKudoEpisodesCount }})</span>
+                            </label>
+                            <br />
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" v-model="filterWakasaRumiEpisodes" class="scale-150">
+                                <span class="px-2 font-bold">واكاسا رومي ({{ WakasaRumiEpisodesCount }})</span>
+                            </label>
+                        </fieldset>
+
+                        <div class="text-center mt-4">
+                            <button 
+                                class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition mt-4" 
+                                @click="closeEmptyPopup">
+                                إغلاق
+                            </button>
+
+                            <br />
+                            
+                            <button 
+                                class="bg-red-500 text-white font-bold py-2 px-4 mx-2 rounded hover:bg-red-700 transition mt-4" 
+                                @click="resetFilters">
+                                إعادة تعيين التصفية
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>            
 
@@ -640,7 +681,7 @@
         <div v-else>
             <table class="min-w-full border-collapse border border-gray-300">
                 <thead>
-                    <tr class="bg-gray-200">
+                    <tr class="">
                         <th class="border border-gray-300 text-xl px-2 py-2 text-center w-1/6">
                             {{ episodeNumberHeader }}
                             <div class="relative">
@@ -704,9 +745,13 @@
                                 </div>
                             </div>
                         </th>                
-                        <th class="border border-gray-300 text-xl px-4 py-2 text-center w-5/6">
+                        <th :class="['border border-gray-300 text-xl px-4 py-2 text-center w-5/6', isAnyFilterActive ? 'bg-orange-500' : '']">
                             {{ episodeTitleHeader }}
-                        </th>
+                            <br />
+                            <span v-if="isAnyFilterActive" class="text-base text-gray-700">
+                            (التصفية قيد التشغيل حالياً)
+                            </span>
+                        </th>                          
                     </tr>
                 </thead>
 
@@ -1159,10 +1204,22 @@
                 },
 
                 HeijiHattoriEpisodesCount() {
-                    return this.episodes.filter(episode => episode.EpisodeType.includes('ه')).length;
+                    return this.episodes.filter(episode => episode.EpisodeEvents.includes('ه')).length;
                 },
                 episodeTypeAllCount() {
                     return this.episodes.filter(episode => episode.EpisodeType.includes('ف') || episode.EpisodeType.includes('م')).length;
+                },
+                episodeTypeAnimeCount() {
+                    return this.episodes.filter(episode => !episode.EpisodeNumber.includes("الفيلم")).length;
+                },
+                episodeTypeMovieCount() {
+                    return this.episodes.filter(episode => episode.EpisodeNumber.includes("الفيلم")).length;
+                },
+                episodeTypeHourlySpecialCount() {
+                    return this.episodes.filter(episode => episode.EpisodeSpecial.includes('1')).length;
+                },
+                episodeTypeTwoHourSpecialCount() {
+                    return this.episodes.filter(episode => episode.EpisodeSpecial.includes('2')).length;
                 },
                 policeAcademyCount() {
                     return this.episodes.filter(episode => episode.EpisodeEventsAdvanced.includes("أكاديمية الشرطة")).length;
@@ -1252,7 +1309,36 @@
                 },
                 episodeTypeLegend() {
                     return this.selectedFilter === 'movies' ? 'نوع الفلم' : 'نوع الحلقة';
-                }
+                },
+
+                isAnyFilterActive() {
+                    // Check if any of the filters are true
+                    return (
+                        this.filterBlackOrganization ||
+                        this.filterDetectiveBoys ||
+                        this.filterScaryEpisodes ||
+                        this.filterSadyEpisodes ||
+                        this.filterPoliceAcademy ||
+                        this.filterKaitoKidEpisodes ||
+                        this.filterFBI ||
+                        this.filterPSB ||
+                        this.filterNewCharacter ||
+                        this.filterDevelopmentCharacter ||
+                        this.filterFlashBackEpisodes ||
+                        this.filterRomanceEpisodes ||
+                        this.filterAkaiShuichiEpisodes ||
+                        this.filterAmuroToruEpisodes ||
+                        this.filterOkiyaSubaruEpisodes ||
+                        this.filterGinEpisodes ||
+                        this.filterSeraMasumiEpisodes ||
+                        this.filterShinichiKudoEpisodes ||
+                        this.filterKazuhaToyamaEpisodes ||
+                        this.filterMarySeraEpisodes ||
+                        this.filterHanedaShukichiEpisodes ||
+                        this.filterHeijiHattoriEpisodes ||
+                        this.filterWakasaRumiEpisodes ||
+                        this.filterYusakuKudoEpisodes);
+                    },
             },
             watch: {
                 searchQuery(newQuery) {
@@ -1451,6 +1537,7 @@
                     this.filterPoliceAcademy = false;
                     this.filterKaitoKidEpisodes = false;
                     this.episodeTypeFilter = 'All';
+                    this.selectedFilter = 'all';
                     this.filterFBI = false;
                     this.filterPSB = false;
                     this.filterNewCharacter = false;
