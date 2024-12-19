@@ -342,11 +342,11 @@
             
                 <fieldset class="border border-gray-300 rounded p-4 w-1/2">
                     <legend class="px-2 font-bold text-white-600">{{ episodeTypeLegend }}
-                        <!-- <button 
+                        <button 
                             class="bg-orange-500 text-white font-bold py-2 px-1 rounded hover:bg-orange-800 transition" 
                             @click="openEmptyPopup">
                             المزيد
-                        </button> -->
+                        </button>
                     </legend>
                     <div class="flex items-center text-blue font-bold gap-4 justify-center">
                         <label>
@@ -420,12 +420,12 @@
                             <br />
                             <label class="flex items-center space-x-2">
                                 <input type="radio" v-model="selectedFilter" value="hourly_special" class="scale-150" />
-                                <span class="px-2 font-bold">خاصة (ساعة) ({{ episodeTypeHourlySpecialCount }})</span>
+                                <span class="px-2 font-bold">خاصة "ساعة" ({{ episodeTypeHourlySpecialCount }})</span>
                             </label>
                             <br />
                             <label class="flex items-center space-x-2">
                                 <input type="radio" v-model="selectedFilter" value="two_hour_special" class="scale-150" />
-                                <span class="px-2 font-bold">خاصة (ساعتين) ({{ episodeTypeTwoHourSpecialCount }})</span>
+                                <span class="px-2 font-bold">خاصة "ساعتين" ({{ episodeTypeTwoHourSpecialCount }})</span>
                             </label>
                         </fieldset>
 
@@ -767,13 +767,11 @@
                     <div v-if="showModal" class="fixed z-10 inset-0 overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center">
                         <div class="bg-cyan-900 text-slate-200 font-bold rounded-lg p-6 w-4/5 md:w-1/2 lg:w-1/3 max-h-[80vh] overflow-y-auto">
                             <div class="flex justify-between items-center mb-4">
-                                <h2 class="text-xl font-bold" v-if="selectedEpisode">{{ selectedEpisode.EpisodeTitle }}</h2>
+                                <h2 class="text-xl font-bold max-w-[calc(100%-2rem)] overflow-hidden text-ellipsis" v-if="selectedEpisode">{{ selectedEpisode.EpisodeTitle }}</h2>
                                 <button @click="closeModal" class="text-red-600 hover:text-yellow-300 font-bold focus:outline-none">
-                                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
+                                    <img src="https://raw.githubusercontent.com/Ailuro-Poda/test/main/res/close.png" alt="Close" class="h-8 w-8"/>
                                 </button>
-                            </div>
+                            </div>                            
                     
                             <p v-if="selectedEpisode" class="mb-2 text-lg">
                             <span v-if="selectedEpisode.EpisodeNumber.includes('الفيلم')">رقم الفيلم:</span>
@@ -950,8 +948,7 @@
             </div>
 
             <!-- Page Size Controls (Right) -->
-            <!-- <div class="text-center font-bold justify-center mt-6">
-                <span class="font-bold">عدد الصفوف في الصفحة:</span>
+            <div class="text-center font-bold justify-center mt-6">
                 <label class="inline-flex items-center mx-1">
                     <input type="radio" v-model="pageSize" :value="5" class="form-radio text-blue-500 mx-1" />
                     <span class="ml-2">5</span>
@@ -972,7 +969,7 @@
                     <input type="radio" v-model="pageSize" :value="25" class="form-radio text-blue-500 mx-1" />
                     <span class="ml-2">25</span>
                 </label>
-            </div> -->
+            </div>
             <!-- <div class="fixKeyboardLayout"></div> -->
         </div>
     </div>
