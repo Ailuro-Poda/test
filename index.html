@@ -1427,41 +1427,43 @@
                 },
 
                 loadData() {
-                    // Reset states before attempting to fetch
-                    this.episodes = [];
-                    this.error = null;
-                    this.loading = true;
+    // Reset states before attempting to fetch
+    this.episodes = [];
+    this.error = null;
+    this.loading = true;
 
-                    // Add a dynamic cache-busting query parameter
-                    const urlWithCacheBust = `${this.jsonUrl}?t=${new Date().getTime()}`;
+    // Add a dynamic cache-busting query parameter
+    const urlWithCacheBust = `${this.jsonUrl}?t=${new Date().getTime()}`;
 
-                    fetch(urlWithCacheBust, { cache: 'no-store' })
-                        .then(response => {
-                            if (response.status === 429) {
-                                // Handle rate-limit error specifically
-                                throw new Error('Rate limit exceeded. Please try again later.');
-                            }
-                            if (!response.ok) {
-                                throw new Error(`HTTP error! status: ${response.status}`);
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            // Successfully fetched data
-                            this.episodes = data;
-                            this.loading = false;
-                        })
-                        .catch(error => {
-                            // Show specific message for rate limit error
-                            if (error.message.includes('Rate limit exceeded')) {
-                                this.error = 'لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار قليلاً والمحاولة مرة أخرى.';
-                            } else {
-                                // General error message for other errors
-                                this.error = 'حدث خطأ أثناء محاولة تحميل البيانات. قد تكون هناك مشكلة مؤقتة في الاتصال أو الخادم. يُرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.';
-                            }
-                            this.loading = false;
-                        });
-                },
+    fetch(urlWithCacheBust, { cache: 'no-store' })
+        .then(response => {
+            if (response.status === 429) {
+                // Handle rate-limit error specifically
+                throw new Error('RATE_LIMIT_EXCEEDED');
+            }
+            if (!response.ok) {
+                // Handle other HTTP errors
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Successfully fetched data
+            this.episodes = data;
+            this.loading = false;
+        })
+        .catch(error => {
+            // Specific handling for rate-limit exceeded
+            if (error.message === 'RATE_LIMIT_EXCEEDED') {
+                this.error = 'لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار قليلاً والمحاولة مرة أخرى.';
+            } else {
+                // General error handling
+                this.error = 'حدث خطأ أثناء محاولة تحميل البيانات. قد تكون هناك مشكلة مؤقتة في الاتصال أو الخادم. يُرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.';
+            }
+            this.loading = false;
+        });
+},
+
 
                 reloadPage() {
                     location.reload(); // Reloads the page
