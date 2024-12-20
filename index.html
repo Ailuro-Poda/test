@@ -1431,7 +1431,16 @@
     this.episodes = [];
     this.error = null;
     this.loading = true;
-    this.waitTime = 0;  // Initialize the waitTime variable
+
+    // Check if the countdown was already stored in localStorage
+    const storedWaitTime = localStorage.getItem('waitTime');
+    if (storedWaitTime) {
+        this.waitTime = parseInt(storedWaitTime, 10);
+        // If the countdown is still active, show the error message
+        this.error = `لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار ${this.waitTime} ثانية والمحاولة مرة أخرى.`;
+        this.startTimer();  // Continue the countdown
+        return;  // Exit early to avoid unnecessary fetch
+    }
 
     // Add a dynamic cache-busting query parameter
     const urlWithCacheBust = `${this.jsonUrl}?t=${new Date().getTime()}`;
@@ -1449,6 +1458,9 @@
                     
                     // Show initial error message with wait time
                     this.error = `لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار ${this.waitTime} ثانية والمحاولة مرة أخرى.`;
+
+                    // Store waitTime in localStorage
+                    localStorage.setItem('waitTime', this.waitTime);
 
                     console.warn(data.message); // Optional: Log additional server message
 
@@ -1468,6 +1480,8 @@
                 // Successfully fetched data
                 this.episodes = data;
                 this.loading = false;
+                // Clear the stored waitTime when data is successfully fetched
+                localStorage.removeItem('waitTime');
             }
         })
         .catch(error => {
@@ -1486,10 +1500,14 @@ startTimer() {
                 this.waitTime -= 1;
                 // Update the error message with the remaining wait time
                 this.error = `لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار ${this.waitTime} ثانية والمحاولة مرة أخرى.`;
+                
+                // Update the stored waitTime in localStorage
+                localStorage.setItem('waitTime', this.waitTime);
             } else {
                 clearInterval(timerInterval); // Stop the timer when waitTime reaches 0
                 this.error = ''; // Reset the error message
                 this.loadData(); // Retry fetching data
+                localStorage.removeItem('waitTime'); // Clear stored waitTime after retry
             }
         }, 1000); // Update every second
     }
