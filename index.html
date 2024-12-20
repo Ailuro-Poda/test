@@ -317,10 +317,12 @@
     <div v-if="error" class="text-center text-xl mb-4 text-red-500 font-bold py-4">
         <p class="mb-4">{{ error }}</p>
         <button 
-            @click="reloadPage" 
-            class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
-            حاول مرة أخرى
-        </button>
+        @click="reloadPage" 
+        :disabled="waitTime > 0" 
+        class="bg-blue-500 text-white font-bold py-2 px-4 rounded"
+        :class="{'opacity-50 cursor-not-allowed': waitTime > 0, 'hover:bg-blue-700': waitTime === 0}">
+        حاول مرة أخرى
+    </button>    
     </div>
 
         <h1 class="text-4xl font-bold mb-4 text-center" onclick="location.reload();">
@@ -1457,7 +1459,7 @@
                     this.waitTime = Math.max(0, Math.floor((resetTime - Date.now()) / 1000)); // Convert to seconds
                     
                     // Show initial error message with wait time
-                    this.error = `لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار ${this.waitTime} ثانية والمحاولة مرة أخرى.`;
+                    this.error = `لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار ${this.waitTime} ثانية.`;
 
                     // Store waitTime in localStorage
                     localStorage.setItem('waitTime', this.waitTime);
@@ -1499,7 +1501,7 @@ startTimer() {
             if (this.waitTime > 0) {
                 this.waitTime -= 1;
                 // Update the error message with the remaining wait time
-                this.error = `لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار ${this.waitTime} ثانية والمحاولة مرة أخرى.`;
+                this.error = `لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار ${this.waitTime} ثانية.`;
                 
                 // Update the stored waitTime in localStorage
                 localStorage.setItem('waitTime', this.waitTime);
