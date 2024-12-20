@@ -1438,10 +1438,12 @@
     fetch(urlWithCacheBust, { cache: 'no-store' })
         .then(response => {
             if (response.status === 429) {
-                // Explicitly handle rate-limit responses
-                this.error = 'لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار قليلاً والمحاولة مرة أخرى.';
-                this.loading = false;
-                return null; // Stop further processing
+                // Parse JSON response for rate-limit details
+                return response.json().then(data => {
+                    this.error = 'لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار قليلاً والمحاولة مرة أخرى.';
+                    this.loading = false;
+                    console.warn(data.message); // Optional: Log additional server message
+                });
             }
 
             if (!response.ok) {
@@ -1458,7 +1460,7 @@
             }
         })
         .catch(error => {
-            // Fallback error handling for network failures or other unexpected errors
+            // General error handling
             if (!this.error) {
                 this.error = 'حدث خطأ أثناء محاولة تحميل البيانات. قد تكون هناك مشكلة مؤقتة في الاتصال أو الخادم. يُرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.';
             }
