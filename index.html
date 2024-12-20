@@ -1508,6 +1508,7 @@ startTimer() {
                 this.error = ''; // Reset the error message
                 this.loadData(); // Retry fetching data
                 localStorage.removeItem('waitTime'); // Clear stored waitTime after retry
+                window.location.reload(); // Refresh the page after countdown ends
             }
         }, 1000); // Update every second
     }
