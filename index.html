@@ -1441,12 +1441,15 @@
             if (response.status === 429) {
                 // Parse JSON response for rate-limit details
                 return response.json().then(data => {
-                    this.error = 'لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار قليلاً والمحاولة مرة أخرى.';
                     this.loading = false;
 
                     // Set a waitTime based on the rate-limiting information from the server
                     const resetTime = data.resetTime || Date.now() + 60000; // Adjust as needed
                     this.waitTime = Math.max(0, Math.floor((resetTime - Date.now()) / 1000)); // Convert to seconds
+                    
+                    // Show initial error message with wait time
+                    this.error = `لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار ${this.waitTime} ثانية والمحاولة مرة أخرى.`;
+
                     console.warn(data.message); // Optional: Log additional server message
 
                     // Start a timer to update the wait time
@@ -1481,6 +1484,8 @@ startTimer() {
         const timerInterval = setInterval(() => {
             if (this.waitTime > 0) {
                 this.waitTime -= 1;
+                // Update the error message with the remaining wait time
+                this.error = `لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار ${this.waitTime} ثانية والمحاولة مرة أخرى.`;
             } else {
                 clearInterval(timerInterval); // Stop the timer when waitTime reaches 0
                 this.error = ''; // Reset the error message
