@@ -1436,20 +1436,20 @@
     const urlWithCacheBust = `${this.jsonUrl}?t=${new Date().getTime()}`;
 
     fetch(urlWithCacheBust, { cache: 'no-store' })
-        .then(response => {
-            // Handle rate-limit response (429)
+        .then(async response => {
             if (response.status === 429) {
+                // Parse error body for a detailed message
+                const errorBody = await response.json();
                 this.error = 'لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار قليلاً والمحاولة مرة أخرى.';
                 this.loading = false;
                 return null; // Stop further processing
             }
 
             if (!response.ok) {
-                // Throw an error for other HTTP statuses
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            // Return the parsed JSON data
+            // Parse and return JSON data
             return response.json();
         })
         .then(data => {
@@ -1460,11 +1460,8 @@
             }
         })
         .catch(error => {
-            // Explicitly check for the rate-limit error
-            if (error.message.includes('429') || error.message === 'Rate limit exceeded') {
-                this.error = 'لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار قليلاً والمحاولة مرة أخرى.';
-            } else if (!this.error) {
-                // General error handling for non-429 issues
+            // Handle errors explicitly
+            if (!this.error) {
                 this.error = 'حدث خطأ أثناء محاولة تحميل البيانات. قد تكون هناك مشكلة مؤقتة في الاتصال أو الخادم. يُرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.';
             }
             this.loading = false;
