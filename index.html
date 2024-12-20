@@ -1436,10 +1436,9 @@
     const urlWithCacheBust = `${this.jsonUrl}?t=${new Date().getTime()}`;
 
     fetch(urlWithCacheBust, { cache: 'no-store' })
-        .then(async response => {
+        .then(response => {
             if (response.status === 429) {
-                // Parse error body for a detailed message
-                const errorBody = await response.json();
+                // Explicitly handle rate-limit responses
                 this.error = 'لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار قليلاً والمحاولة مرة أخرى.';
                 this.loading = false;
                 return null; // Stop further processing
@@ -1449,7 +1448,6 @@
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            // Parse and return JSON data
             return response.json();
         })
         .then(data => {
@@ -1460,7 +1458,7 @@
             }
         })
         .catch(error => {
-            // Handle errors explicitly
+            // Fallback error handling for network failures or other unexpected errors
             if (!this.error) {
                 this.error = 'حدث خطأ أثناء محاولة تحميل البيانات. قد تكون هناك مشكلة مؤقتة في الاتصال أو الخادم. يُرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.';
             }
