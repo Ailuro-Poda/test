@@ -1439,7 +1439,9 @@
         .then(response => {
             if (response.status === 429) {
                 // Handle rate-limit error specifically
-                throw new Error('RATE_LIMIT_EXCEEDED');
+                this.error = 'لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار قليلاً والمحاولة مرة أخرى.';
+                this.loading = false;
+                return null; // Stop further processing
             }
             if (!response.ok) {
                 // Handle other HTTP errors
@@ -1448,16 +1450,15 @@
             return response.json();
         })
         .then(data => {
-            // Successfully fetched data
-            this.episodes = data;
-            this.loading = false;
+            if (data) {
+                // Successfully fetched data
+                this.episodes = data;
+                this.loading = false;
+            }
         })
         .catch(error => {
-            // Specific handling for rate-limit exceeded
-            if (error.message === 'RATE_LIMIT_EXCEEDED') {
-                this.error = 'لقد تجاوزت الحد المسموح به من الطلبات. يُرجى الانتظار قليلاً والمحاولة مرة أخرى.';
-            } else {
-                // General error handling
+            // General error handling for non-429 issues
+            if (!this.error) {
                 this.error = 'حدث خطأ أثناء محاولة تحميل البيانات. قد تكون هناك مشكلة مؤقتة في الاتصال أو الخادم. يُرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.';
             }
             this.loading = false;
